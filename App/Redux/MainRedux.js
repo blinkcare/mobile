@@ -1,8 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
-const ENDPOINT = "https://blinkpennapps.localtunnel.me/"
-
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -19,7 +17,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   current: "",
   waiting: "",
-  error: false,
+  error: true,
   status: false
 })
 
@@ -29,7 +27,7 @@ export const request = (state) =>
   state.merge({})
 
 export const success = (state, {current, waiting, status}) =>
-  state.merge({current, waiting, status})
+  state.merge({current, waiting, status, error: false})
 
 export const failure = (state) =>
   state.merge({error: true})
@@ -38,7 +36,7 @@ export const failure = (state) =>
 /* ----------------------- Thunk Actions ----------------------- */
 
 export const send = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(Creators.startRequest())
 
     const head = {
@@ -46,7 +44,8 @@ export const send = () => {
       mode: 'cors'
     }
 
-    return fetch(ENDPOINT, head)
+
+    return fetch(getState().settings.endpoint, head)
       .then(res => res.json())
       .then(res => {
         const { characters, queue, status } = res

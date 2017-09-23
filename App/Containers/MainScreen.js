@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, KeyboardAvoidingView, View } from 'react-native'
-import { Card } from 'react-native-elements'
+import { Card, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import timer from 'react-native-timer'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
@@ -14,6 +14,11 @@ import MorseDisplay from '../Components/MorseDisplay'
 
 class MainScreen extends Component {
 
+  static navigationOptions = ({navigation}) => ({
+    title: 'Home',
+    headerRight: <Icon name="settings" style={{paddingRight: 15}} size={30} onPress={() => navigation.navigate('SettingsScreen')} />
+  })
+
   componentDidMount () {
     timer.setInterval("serverUpdate", this.props.send, 500)
   }
@@ -23,11 +28,18 @@ class MainScreen extends Component {
   }
 
   render () {
+
+    let error = null
+    if (this.props.error) {
+      error = <Text style={styles.errorText}>There was an error connecting to the device.</Text>
+    }
+
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
           <Card>
             <MorseDisplay current={this.props.current} waiting={this.props.waiting} status={this.props.status} />
+            {error}
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -40,7 +52,8 @@ const mapStateToProps = (state) => {
   return {
     current: state.main.current,
     waiting: state.main.waiting,
-    status: state.main.status
+    status: state.main.status,
+    error: state.main.error
   }
 }
 
