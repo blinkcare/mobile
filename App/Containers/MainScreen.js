@@ -48,7 +48,6 @@ class MainScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     current: state.main.current,
     waiting: state.main.waiting,
