@@ -3992,6 +3992,10 @@ ignite-ir-boilerplate@^2.1.1:
   dependencies:
     ramda "^0.23.0"
 
+ignite-redux-thunk@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ignite-redux-thunk/-/ignite-redux-thunk-0.0.1.tgz#deb0b4cef25118f3dcf3531d2b57ce8aace3c86d"
+
 ignite-standard@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ignite-standard/-/ignite-standard-1.0.0.tgz#76ad70395d3e8a382dcf1395761e1ae19b6d0849"
@@ -6836,6 +6840,10 @@ redux-persist@^4.1.0:
 redux-saga@^0.15.3, redux-saga@^0.15.6:
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.15.6.tgz#8638dc522de6c6c0a496fe8b2b5466287ac2dc4d"
+
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.6.0, redux@^3.7.1:
   version "3.7.2"
