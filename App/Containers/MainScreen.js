@@ -3,6 +3,7 @@ import { ScrollView, Text, KeyboardAvoidingView, View } from 'react-native'
 import { Card, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import timer from 'react-native-timer'
+import Parse from 'parse/react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import MainActions, {send} from '../Redux/MainRedux'
 
@@ -20,11 +21,11 @@ class MainScreen extends Component {
   })
 
   componentDidMount () {
-    timer.setInterval("serverUpdate", this.props.send, 500)
+    let query = new Parse.Query('Queue')
+
   }
 
   componentWillUnmount() {
-    timer.clearInterval("serverUpdate")
   }
 
   render () {

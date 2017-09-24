@@ -5,10 +5,7 @@ import validUrl from 'valid-url'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  startRequest: null,
-  successRequest: ['current', 'waiting', 'status'],
-  failedRequest: null,
-  setIp: ['ip']
+  setSession: ['token']
 })
 
 export const MainTypes = Types
@@ -17,26 +14,13 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  current: "",
-  waiting: "",
-  error: true,
-  status: false,
-  ip: ""
+  sessionToken: ""
 })
 
 /* ------------- Reducers ------------- */
 
-export const request = (state) =>
-  state.merge({})
-
-export const success = (state, {current, waiting, status}) =>
-  state.merge({current, waiting, status, error: false})
-
-export const failure = (state) =>
-  state.merge({error: true})
-
-export const ip = (state, { i }) =>
-  state.merge({ip: i})
+export const token = (state, { token }) =>
+  state.merge({sessionToken: token})
 
 
 /* ----------------------- Thunk Actions ----------------------- */
@@ -77,8 +61,5 @@ export const send = () => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.START_REQUEST]: request,
-  [Types.SUCCESS_REQUEST]: success,
-  [Types.FAILED_REQUEST]: failure,
-  [Types.SET_IP]: ip
+  [Types.SET_SESSION]: token,
 })
