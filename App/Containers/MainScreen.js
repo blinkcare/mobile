@@ -58,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    send: () => dispatch(send())
+    send: () => dispatch(send()),
+    setIP: (ip) => dispatch(MainActions.setIp(ip))
   }
 }
 
