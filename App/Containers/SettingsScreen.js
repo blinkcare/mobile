@@ -20,7 +20,7 @@ class SettingsScreen extends Component {
         <KeyboardAvoidingView behavior='position'>
           <Card>
             <FormLabel>Endpoint</FormLabel>
-            <FormInput value={this.props.endpoint} onChangeText={(text) => this.props.updateEndpoint(text)}/>
+            <FormInput value={this.props.deviceName} onChangeText={(text) => this.props.updateDevice(text)}/>
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -30,13 +30,13 @@ class SettingsScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    endpoint: state.settings.endpoint
+    deviceName: state.settings.deviceName
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateEndpoint: (text) => dispatch(SettingsActions.updateEndpoint(text))
+    updateDevice: (text) => dispatch(SettingsActions.updateDevice(text))
   }
 }
 

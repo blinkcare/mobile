@@ -1,11 +1,54 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-import validUrl from 'valid-url'
+import Parse from 'parse/react-native'
+
+function swap(json){
+  var ret = {};
+  for(var key in json){
+    ret[json[key]] = key;
+  }
+  console.log(ret)
+  return ret;
+}
+
+let morseAlphabet = {
+  "A": ".-",
+  "B": "-...",
+  "C": "-.-.",
+  "D": "-..",
+  "E": ".",
+  "F": "..-.",
+  "G": "--.",
+  "H": "....",
+  "I": "..",
+  "J": ".---",
+  "K": "-.-",
+  "L": ".-..",
+  "M": "--",
+  "N": "-.",
+  "O": "---",
+  "P": ".--.",
+  "Q": "--.-",
+  "R": ".-.",
+  "S": "...",
+  "T": "-",
+  "U": "..-",
+  "V": "...-",
+  "W": ".--",
+  "X": "-..-",
+  "Y": "-.--",
+  "Z": "--..",
+  " ": "....-",
+  "/": "---...",
+  "_": ".---."
+}
 
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  setSession: ['token']
+  setChars: ['chars'],
+  setState: ['state'],
+  setQueue: ['queue']
 })
 
 export const MainTypes = Types
@@ -14,52 +57,58 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  sessionToken: ""
-})
+  characters: "",
+  status: false,
+  queue: "",
+  morse: swap(morseAlphabet)
+  })
 
 /* ------------- Reducers ------------- */
 
-export const token = (state, { token }) =>
-  state.merge({sessionToken: token})
+export const setchar = (state, {chars}) =>
+  state.merge({characters: chars})
 
+export const setstate = (state, {stat}) =>
+  state.merge({status: stat})
 
-/* ----------------------- Thunk Actions ----------------------- */
+export const setq = (state, {queue}) =>
+  state.merge({queue: queue})
 
-export const send = () => {
+/* ------------- Thunk Actions ------------- */
+
+export const getQueue = (object) => {
   return (dispatch, getState) => {
-    dispatch(Creators.startRequest())
 
-    const head = {
-      method: 'GET',
-      mode: 'cors'
+    let queue = object.get("queue")
+    let started = object.get("started")
+
+    let chars = ""
+
+    let individual = queue.split('|')
+
+    if (started) {
+      for (let i = 0; i < individual.length; i++) {
+        if (!(individual[i] == "")) {
+          if (individual[i] in getState().main.morse) {
+            if (getState().main.morse[individual[i]] == '_') { // Check for backspace
+              chars = chars.slice(0, -1);
+            } else {
+              chars += getState().main.morse[individual[i]]
+            }
+          }
+        }
+      }
+
+      dispatch(Creators.setChars(chars))
     }
-
-    let endpoint = "http://blink.local/"
-
-    if (validUrl.isWebUri(getState().settings.endpoint)) {
-      endpoint = getState().settings.endpoint
-    }
-
-    console.log(endpoint)
-
-    return fetch(endpoint, head)
-      .then(res => {
-        console.log(res)
-        return res.json()
-      })
-      .then(res => {
-        const { characters, queue, status } = res
-        dispatch(Creators.successRequest(characters, queue, status))
-      }).catch(e => {
-        console.log(e)
-        dispatch(Creators.failedRequest())
-      })
-
+    dispatch(Creators.setQueue(individual[individual.length-1]))
   }
 }
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_SESSION]: token,
+  [Types.SET_CHARS]: setchar,
+  [Types.SET_STATE]: setstate,
+  [Types.SET_QUEUE]: setq
 })

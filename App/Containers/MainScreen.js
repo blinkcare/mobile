@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import timer from 'react-native-timer'
 import Parse from 'parse/react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-import MainActions, {send} from '../Redux/MainRedux'
+import MainActions, {getQueue} from '../Redux/MainRedux'
 
 // Styles
 import styles from './Styles/MainScreenStyle'
@@ -15,6 +15,7 @@ import MorseDisplay from '../Components/MorseDisplay'
 
 class MainScreen extends Component {
 
+
   static navigationOptions = ({navigation}) => ({
     title: 'Home',
     headerRight: <Icon name="settings" style={{paddingRight: 15}} size={30} onPress={() => navigation.navigate('SettingsScreen')} />
@@ -22,10 +23,21 @@ class MainScreen extends Component {
 
   componentDidMount () {
     let query = new Parse.Query('Queue')
-
+    query.equalTo("deviceName", this.props.deviceName) // /////////////////// ONLY WORKS ON APP RESTART /////////////////////////////
+    this.subscription = query.subscribe()
+    this.subscription.on('create', (object) => {
+      this.props.getQueue(object)
+    })
+    this.subscription.on('update', (object) => {
+      this.props.getQueue(object)
+    })
+    this.subscription.on('enter', (object) => {
+      this.props.getQueue(object)
+    })
   }
 
   componentWillUnmount() {
+    this.subscription.unsubscribe()
   }
 
   render () {
@@ -39,7 +51,7 @@ class MainScreen extends Component {
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
           <Card>
-            <MorseDisplay current={this.props.current} waiting={this.props.waiting} status={this.props.status} />
+            <MorseDisplay current={this.props.characters} waiting={this.props.queue} status={this.props.status} />
             {error}
           </Card>
         </KeyboardAvoidingView>
@@ -50,17 +62,16 @@ class MainScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    current: state.main.current,
-    waiting: state.main.waiting,
+    deviceName: state.settings.deviceName,
     status: state.main.status,
-    error: state.main.error
+    characters: state.main.characters,
+    queue: state.main.queue
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    send: () => dispatch(send()),
-    setIP: (ip) => dispatch(MainActions.setIp(ip))
+    getQueue: (object) => dispatch(getQueue(object))
   }
 }
 

@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  updateEndpoint: ['text']
+  updateDevice: ['name']
 })
 
 export const SettingsTypes = Types
@@ -13,16 +13,16 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  endpoint: "https://blinkpennapps.localtunnel.me"
+  deviceName: "Blinky"
 })
 
 /* ------------- Reducers ------------- */
 
-export const endpoint = (state, { text }) =>
-  state.merge({ endpoint: text })
+export const device = (state, { name }) =>
+  state.merge({ deviceName: name })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UPDATE_ENDPOINT]: endpoint,
+  [Types.UPDATE_DEVICE]: device,
 })

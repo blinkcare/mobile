@@ -8,8 +8,9 @@ export default () => {
     nav: require('./NavigationRedux').reducer,
     github: require('./GithubRedux').reducer,
     search: require('./SearchRedux').reducer,
-    main: require('./MainRedux').reducer,
-    settings: require('./SettingsRedux').reducer
+    login: require('./LoginRedux').reducer,
+    settings: require('./SettingsRedux').reducer,
+    main: require("./MainRedux").reducer
   })
 
   return configureStore(rootReducer, rootSaga)

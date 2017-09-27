@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView, Button } from 'react-native'
 import { connect } from 'react-redux'
+import Parse from 'parse/react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -11,6 +12,12 @@ class SplashScreen extends Component {
 
   static navigationOptions = {
     title: 'Blink!'
+  }
+
+  componentDidMount() {
+    console.log("Initializing")
+    Parse.initialize("APPLICATION_ID")
+    Parse.serverURL = 'http://192.168.100.113:1337/parse'
   }
 
   render () {
