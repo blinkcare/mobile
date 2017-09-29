@@ -17,7 +17,6 @@ export default class MorseDisplay extends Component {
   // }
 
   render () {
-    console.log(this.props.waiting)
     return (
       <View style={styles.textView}>
         <Text style={styles.current}>{this.props.current}</Text>

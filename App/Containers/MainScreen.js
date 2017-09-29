@@ -53,7 +53,7 @@ class MainScreen extends Component {
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
           <Card>
-            <MorseDisplay current={this.props.characters} waiting={this.props.queue} status={this.props.status} />
+            <MorseDisplay current={this.props.characters} waiting={this.props.queue} status={this.props.stats} />
             {error}
           </Card>
         </KeyboardAvoidingView>
@@ -65,7 +65,7 @@ class MainScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     deviceName: state.settings.deviceName,
-    status: state.main.status,
+    stats: state.main.stats,
     characters: state.main.characters,
     queue: state.main.queue
   }

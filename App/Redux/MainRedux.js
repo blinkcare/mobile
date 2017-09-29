@@ -47,7 +47,7 @@ let morseAlphabet = {
 
 const { Types, Creators } = createActions({
   setChars: ['chars'],
-  setState: ['state'],
+  setStats: ['state'],
   setQueue: ['queue']
 })
 
@@ -58,7 +58,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   characters: "",
-  status: false,
+  stats: false,
   queue: "",
   morse: swap(morseAlphabet)
   })
@@ -82,6 +82,7 @@ export const getQueue = (object) => {
     let queue = object.get("queue")
     console.log(queue)
     let started = object.get("started")
+    dispatch(Creators.setStats(started))
 
     let chars = ""
 
@@ -99,7 +100,6 @@ export const getQueue = (object) => {
           }
         }
         if (queue[queue.length-1] == "|") {
-          console.log("Clear queue")
           dispatch(Creators.setQueue(""))
         }
       }
@@ -116,6 +116,6 @@ export const getQueue = (object) => {
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_CHARS]: setchar,
-  [Types.SET_STATE]: setstate,
+  [Types.SET_STATS]: setstate,
   [Types.SET_QUEUE]: setq
 })
