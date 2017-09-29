@@ -18,7 +18,8 @@ class MainScreen extends Component {
 
   static navigationOptions = ({navigation}) => ({
     title: 'Home',
-    headerRight: <Icon name="settings" style={{paddingRight: 15}} size={30} onPress={() => navigation.navigate('SettingsScreen')} />
+    headerRight: <Icon name="settings" style={{paddingRight: 15}} size={30} onPress={() => navigation.navigate('SettingsScreen')} />,
+    headerLeft: null
   })
 
   componentDidMount () {
@@ -29,6 +30,7 @@ class MainScreen extends Component {
       this.props.getQueue(object)
     })
     this.subscription.on('update', (object) => {
+      console.log(object)
       this.props.getQueue(object)
     })
     this.subscription.on('enter', (object) => {

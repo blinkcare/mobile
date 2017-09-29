@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   ...ApplicationStyles.screen,
   login: {
-
+    marginBottom: 10
   },
   signup: {
     marginTop: 10

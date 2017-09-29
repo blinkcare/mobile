@@ -11,13 +11,31 @@ import styles from './Styles/SplashScreenStyle'
 class SplashScreen extends Component {
 
   static navigationOptions = {
-    title: 'Blink!'
+    title: 'Blink!',
+    headerLeft: null
   }
 
-  componentDidMount() {
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
+
+  componentWillMount() {
     console.log("Initializing")
     Parse.initialize("APPLICATION_ID")
     Parse.serverURL = 'http://192.168.100.113:1337/parse'
+    Parse.User.currentAsync().then(out => {
+      if (out != null) {
+        console.log(out)
+        this.props.navigation.navigate("MainScreen")
+      }
+    })
+      
   }
 
   render () {

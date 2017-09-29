@@ -80,6 +80,7 @@ export const getQueue = (object) => {
   return (dispatch, getState) => {
 
     let queue = object.get("queue")
+    console.log(queue)
     let started = object.get("started")
 
     let chars = ""
@@ -97,9 +98,15 @@ export const getQueue = (object) => {
             }
           }
         }
+        if (queue[queue.length-1] == "|") {
+          console.log("Clear queue")
+          dispatch(Creators.setQueue(""))
+        }
       }
 
       dispatch(Creators.setChars(chars))
+    } else {
+      dispatch(Creators.setChars(""))
     }
     dispatch(Creators.setQueue(individual[individual.length-1]))
   }
