@@ -9,19 +9,22 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
-const PrimaryNav = StackNavigator({
-  SignupScreen: { screen: SignupScreen },
-  LoginScreen: { screen: LoginScreen },
-  SplashScreen: { screen: SplashScreen },
-  SettingsScreen: { screen: SettingsScreen },
-  MainScreen: { screen: MainScreen }
-}, {
-  // Default config for all screens
-  headerMode: 'float',
-  initialRouteName: 'SplashScreen',
-  navigationOptions: {
-    headerStyle: styles.header
+const PrimaryNav = StackNavigator(
+  {
+    SignupScreen: { screen: SignupScreen },
+    LoginScreen: { screen: LoginScreen },
+    SplashScreen: { screen: SplashScreen },
+    SettingsScreen: { screen: SettingsScreen },
+    MainScreen: { screen: MainScreen }
+  },
+  {
+    // Default config for all screens
+    headerMode: 'float',
+    initialRouteName: 'SplashScreen',
+    navigationOptions: {
+      headerStyle: styles.header
+    }
   }
-})
+)
 
 export default PrimaryNav

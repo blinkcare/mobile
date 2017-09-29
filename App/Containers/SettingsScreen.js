@@ -4,40 +4,44 @@ import { connect } from 'react-redux'
 import { Card, FormLabel, FormInput } from 'react-native-elements'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import SettingsActions from '../Redux/SettingsRedux'
-import {logout} from '../Redux/LoginRedux'
+import { logout } from '../Redux/LoginRedux'
 
 // Styles
 import styles from './Styles/SettingsScreenStyle'
 
 class SettingsScreen extends Component {
-
   resetNavigation(targetRoute) {
-    console.log("Navigating")
+    console.log('Navigating')
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: targetRoute }),
-      ],
-    });
-    this.props.navigation.dispatch(resetAction);
+      actions: [NavigationActions.navigate({ routeName: targetRoute })]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
   static navigationOptions = {
     title: 'Settings'
   }
 
-  render () {
+  render() {
     return (
       <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
+        <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Device Name</FormLabel>
-            <FormInput value={this.props.deviceName} onChangeText={(text) => this.props.updateDevice(text)}/>
-            <Button style={styles.logoutBtn} title="Log out" onPress={() => {
-              this.props.logout().then(() => {
-                this.props.navigation.navigate("SplashScreen")
-              })
-            }}/>
+            <FormInput
+              value={this.props.deviceName}
+              onChangeText={text => this.props.updateDevice(text)}
+            />
+            <Button
+              style={styles.logoutBtn}
+              title="Log out"
+              onPress={() => {
+                this.props.logout().then(() => {
+                  this.props.navigation.navigate('SplashScreen')
+                })
+              }}
+            />
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -45,15 +49,15 @@ class SettingsScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     deviceName: state.settings.deviceName
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    updateDevice: (text) => dispatch(SettingsActions.updateDevice(text)),
+    updateDevice: text => dispatch(SettingsActions.updateDevice(text)),
     logout: () => dispatch(logout())
   }
 }

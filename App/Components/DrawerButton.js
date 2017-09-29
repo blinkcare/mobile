@@ -10,12 +10,12 @@ import ExamplesRegistry from '../Services/ExamplesRegistry'
 
 // Ignore in coverage report
 /* istanbul ignore next */
-ExamplesRegistry.addComponentExample('Drawer Button', () =>
+ExamplesRegistry.addComponentExample('Drawer Button', () => (
   <DrawerButton
-    text='Example left drawer button'
+    text="Example left drawer button"
     onPress={() => window.alert('Your drawers are showing')}
   />
-)
+))
 
 class DrawerButton extends Component {
   static propTypes = {
@@ -23,7 +23,7 @@ class DrawerButton extends Component {
     onPress: PropTypes.func
   }
 
-  render () {
+  render() {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
         <Text style={styles.text}>{this.props.text}</Text>

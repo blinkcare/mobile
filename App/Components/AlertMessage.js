@@ -13,16 +13,16 @@ export default class AlertMessage extends Component {
     show: PropTypes.bool
   }
 
-  render () {
+  render() {
     let messageComponent = null
     if (this.props.show) {
       const { title } = this.props
       return (
-        <View
-          style={[styles.container, this.props.style]}
-        >
+        <View style={[styles.container, this.props.style]}>
           <View style={styles.contentContainer}>
-            <Text allowFontScaling={false} style={styles.message}>{title && title.toUpperCase()}</Text>
+            <Text allowFontScaling={false} style={styles.message}>
+              {title && title.toUpperCase()}
+            </Text>
           </View>
         </View>
       )

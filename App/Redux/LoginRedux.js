@@ -21,39 +21,32 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  username: "",
-  password: "",
-  passwordtwo: "",
-  email: "",
-  token: "",
+  username: '',
+  password: '',
+  passwordtwo: '',
+  email: '',
+  token: '',
   logging: false,
   passmismatch: false,
-  error: "",
+  error: ''
 })
 
 /* ------------- Reducers ------------- */
 
+export const username = (state, { username }) => state.merge({ username })
 
-export const username = (state, { username }) =>
-  state.merge({ username })
+export const error = (state, { error }) => state.merge({ error })
 
-export const error = (state, { error }) =>
-  state.merge({ error })
-
-export const password = (state, { password }) =>
-  state.merge({ password })
+export const password = (state, { password }) => state.merge({ password })
 
 export const password2 = (state, { passwordtwo }) =>
   state.merge({ passwordtwo })
 
-export const email = (state, { email }) =>
-  state.merge({ email })
+export const email = (state, { email }) => state.merge({ email })
 
-export const token = (state, { token }) =>
-  state.merge({ token })
+export const token = (state, { token }) => state.merge({ token })
 
-export const logging = (state, { log }) =>
-  state.merge({ logging: log })
+export const logging = (state, { log }) => state.merge({ logging: log })
 
 export const mismatch = (state, { status }) =>
   state.merge({ passmismatch: status })
@@ -62,13 +55,13 @@ export const mismatch = (state, { status }) =>
 
 export const login = () => {
   return (dispatch, getState) => {
-    console.log("Logging in")
+    console.log('Logging in')
     dispatch(Creators.setLogging(true))
     return new Promise((resolve, reject) => {
       Parse.User.logIn(getState().login.username, getState().login.password, {
-        success: (user) => {
+        success: user => {
           dispatch(Creators.setLogging(false))
-          dispatch(Creators.setError(""))
+          dispatch(Creators.setError(''))
           dispatch(Creators.setToken(user.sessionToken))
           resolve()
         },
@@ -84,16 +77,16 @@ export const login = () => {
 
 export const signup = () => {
   return (dispatch, getState) => {
-    console.log("Signing up")
+    console.log('Signing up')
     dispatch(Creators.setLogging(true))
-    var user = new Parse.User();
-    user.set("username", getState().login.username)
-    user.set("password", getState().login.password)
-    user.set("email", getState().login.email)
+    var user = new Parse.User()
+    user.set('username', getState().login.username)
+    user.set('password', getState().login.password)
+    user.set('email', getState().login.email)
     return new Promise((resolve, reject) => {
       user.signUp(null, {
-        success: (user) => {
-          dispatch(Creators.setError(""))
+        success: user => {
+          dispatch(Creators.setError(''))
           dispatch(Creators.setLogging(false))
           resolve()
         },
@@ -109,7 +102,7 @@ export const signup = () => {
 
 export const logout = () => {
   return (dispatch, getState) => {
-    console.log("Logging out")
+    console.log('Logging out')
     dispatch(Creators.setLogging(true))
     return Parse.User.logOut().then(() => {
       dispatch(Creators.setLogging(false))

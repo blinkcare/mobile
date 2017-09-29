@@ -4,27 +4,28 @@ import { connect } from 'react-redux'
 import { Card, FormInput, FormLabel } from 'react-native-elements'
 import Parse from 'parse/react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-import LoginActions, {signup, login} from '../Redux/LoginRedux'
+import LoginActions, { signup, login } from '../Redux/LoginRedux'
 
 // Styles
 import styles from './Styles/SignupScreenStyle'
 
 class SignupScreen extends Component {
-
   resetNavigation(targetRoute) {
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: targetRoute }),
-      ],
-    });
-    this.props.navigation.dispatch(resetAction);
+      actions: [NavigationActions.navigate({ routeName: targetRoute })]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
-  render () {
+  render() {
     var mismatch = null
     if (this.props.passmismatch) {
-      mismatch = <Text style={styles.errorText}>There was a mismatch of the passwords.</Text>
+      mismatch = (
+        <Text style={styles.errorText}>
+          There was a mismatch of the passwords.
+        </Text>
+      )
     }
 
     var error = null
@@ -34,44 +35,66 @@ class SignupScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
+        <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Username</FormLabel>
-            <FormInput value={this.props.username} onChangeText={(text) => this.props.setUsername(text)}/>
+            <FormInput
+              value={this.props.username}
+              onChangeText={text => this.props.setUsername(text)}
+            />
             <FormLabel>Password</FormLabel>
-            <FormInput secureTextEntry={true} value={this.props.password} onChangeText={(text) => {
-              if (this.props.password === this.props.passwordtwo) {
-                this.props.setMismatch(false)
-              } else {
-                this.props.setMismatch(true)
-              }
-              this.props.setPassword(text)
-            }}/>
+            <FormInput
+              secureTextEntry={true}
+              value={this.props.password}
+              onChangeText={text => {
+                if (this.props.password === this.props.passwordtwo) {
+                  this.props.setMismatch(false)
+                } else {
+                  this.props.setMismatch(true)
+                }
+                this.props.setPassword(text)
+              }}
+            />
             <FormLabel>Confirm Password</FormLabel>
-            <FormInput secureTextEntry={true} value={this.props.passwordtwo} onChangeText={(text) => {
-              if (this.props.password === this.props.passwordtwo) {
-                this.props.setMismatch(false)
-              } else {
-                this.props.setMismatch(true)
-              }
-              this.props.setPasswordTwo(text)
-              }}/>
+            <FormInput
+              secureTextEntry={true}
+              value={this.props.passwordtwo}
+              onChangeText={text => {
+                if (this.props.password === this.props.passwordtwo) {
+                  this.props.setMismatch(false)
+                } else {
+                  this.props.setMismatch(true)
+                }
+                this.props.setPasswordTwo(text)
+              }}
+            />
             <FormLabel>Email</FormLabel>
-            <FormInput keyboardType="email-address" value={this.props.email} onChangeText={(text) => this.props.setEmail(text)}/>
-            <Button onPress={() => {
-              if (this.props.password === this.props.passwordtwo) {
-                Parse.User.currentAsync().then(out => {
-                  if (out) {
-                    Parse.User.logOut()
-                  }
-                })
-                this.props.signup().then(() => {
-                  this.resetNavigation("MainScreen")
-                }).catch(() => {})
-              } else {
-                this.props.setMismatch(true)
-              }
-            }} title="Submit" style={styles.signup}/>
+            <FormInput
+              keyboardType="email-address"
+              value={this.props.email}
+              onChangeText={text => this.props.setEmail(text)}
+            />
+            <Button
+              onPress={() => {
+                if (this.props.password === this.props.passwordtwo) {
+                  Parse.User.currentAsync().then(out => {
+                    if (out) {
+                      Parse.User.logOut()
+                    }
+                  })
+                  this.props
+                    .signup()
+                    .then(() => {
+                      this.resetNavigation('MainScreen')
+                    })
+                    .catch(() => {})
+                } else {
+                  this.props.setMismatch(true)
+                }
+              }}
+              title="Submit"
+              style={styles.signup}
+            />
             {mismatch}
             {error}
           </Card>
@@ -81,7 +104,7 @@ class SignupScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     username: state.login.username,
     password: state.login.password,
@@ -92,11 +115,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     setUsername: username => dispatch(LoginActions.setUsername(username)),
     setPassword: password => dispatch(LoginActions.setPassword(password)),
-    setPasswordTwo: password2 => dispatch(LoginActions.setPasswordTwo(password2)),
+    setPasswordTwo: password2 =>
+      dispatch(LoginActions.setPasswordTwo(password2)),
     setEmail: email => dispatch(LoginActions.setEmail(email)),
     signup: () => dispatch(signup()),
     login: () => dispatch(login()),

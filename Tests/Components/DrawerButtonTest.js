@@ -5,14 +5,16 @@ import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 
 test('AlertMessage component renders correctly', () => {
-  const tree = renderer.create(<DrawerButton onPress={() => {}} text='hi' />).toJSON()
+  const tree = renderer
+    .create(<DrawerButton onPress={() => {}} text="hi" />)
+    .toJSON()
   expect(tree).toMatchSnapshot()
 })
 
 test('onPress', () => {
   let i = 0
   const onPress = () => i++
-  const wrapperPress = shallow(<DrawerButton onPress={onPress} text='hi' />)
+  const wrapperPress = shallow(<DrawerButton onPress={onPress} text="hi" />)
 
   expect(wrapperPress.prop('onPress')).toBe(onPress) // uses the right handler
   expect(i).toBe(0)

@@ -34,7 +34,7 @@ export const success = (state, action) => {
 }
 
 // failed to get the avatar
-export const failure = (state) =>
+export const failure = state =>
   state.merge({ fetching: false, error: true, avatar: null })
 
 /* ------------- Hookup Reducers To Types ------------- */

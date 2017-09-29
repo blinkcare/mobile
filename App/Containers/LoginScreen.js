@@ -11,20 +11,16 @@ import LoginActions, { login } from '../Redux/LoginRedux'
 import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
-
   resetNavigation(targetRoute) {
-    console.log("Navigating")
+    console.log('Navigating')
     const resetAction = NavigationActions.reset({
       index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: targetRoute }),
-      ],
-    });
-    this.props.navigation.dispatch(resetAction);
+      actions: [NavigationActions.navigate({ routeName: targetRoute })]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
-  render () {
-
+  render() {
     var error = null
     console.log(this.props.error)
     if (this.props.error) {
@@ -33,22 +29,36 @@ class LoginScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <KeyboardAvoidingView behavior='position'>
-        <Card>
+        <KeyboardAvoidingView behavior="position">
+          <Card>
             <FormLabel>Username</FormLabel>
-            <FormInput value={this.props.username} onChangeText={(text) => this.props.setUsername(text)}/>
+            <FormInput
+              value={this.props.username}
+              onChangeText={text => this.props.setUsername(text)}
+            />
             <FormLabel>Password</FormLabel>
-            <FormInput secureTextEntry={true} value={this.props.password} onChangeText={(text) => this.props.setPassword(text)}/>
-            <Button onPress={() => {
-              Parse.User.currentAsync().then(out => {
-                if (out) {
-                  Parse.User.logOut()
-                }
-              })
-              this.props.login().then(() => {
-                this.resetNavigation("MainScreen")
-              }).catch(() => {})
-            }} title="Submit" style={styles.signup}/>
+            <FormInput
+              secureTextEntry={true}
+              value={this.props.password}
+              onChangeText={text => this.props.setPassword(text)}
+            />
+            <Button
+              onPress={() => {
+                Parse.User.currentAsync().then(out => {
+                  if (out) {
+                    Parse.User.logOut()
+                  }
+                })
+                this.props
+                  .login()
+                  .then(() => {
+                    this.resetNavigation('MainScreen')
+                  })
+                  .catch(() => {})
+              }}
+              title="Submit"
+              style={styles.signup}
+            />
             {error}
           </Card>
         </KeyboardAvoidingView>
@@ -57,7 +67,7 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     username: state.login.username,
     password: state.login.password,
@@ -66,10 +76,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    setUsername: (text) => dispatch(LoginActions.setUsername(text)),
-    setPassword: (text) => dispatch(LoginActions.setPassword(text)),
+    setUsername: text => dispatch(LoginActions.setUsername(text)),
+    setPassword: text => dispatch(LoginActions.setPassword(text)),
     login: () => dispatch(login())
   }
 }

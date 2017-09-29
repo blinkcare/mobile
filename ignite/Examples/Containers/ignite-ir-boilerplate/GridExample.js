@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/GridExampleStyle'
 
 class GridExample extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     // If you need scroll to bottom, consider http://bit.ly/2bMQ2BZ
 
@@ -19,13 +19,13 @@ class GridExample extends Component {
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
     const dataObjects = [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'}
+      { title: 'First Title', description: 'First Description' },
+      { title: 'Second Title', description: 'Second Description' },
+      { title: 'Third Title', description: 'Third Description' },
+      { title: 'Fourth Title', description: 'Fourth Description' },
+      { title: 'Fifth Title', description: 'Fifth Description' },
+      { title: 'Sixth Title', description: 'Sixth Description' },
+      { title: 'Seventh Title', description: 'Seventh Description' }
     ]
 
     /* ***********************************************************
@@ -37,7 +37,7 @@ class GridExample extends Component {
     const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
-    const ds = new ListView.DataSource({rowHasChanged})
+    const ds = new ListView.DataSource({ rowHasChanged })
 
     // Datasource is always in state
     this.state = {
@@ -53,7 +53,7 @@ class GridExample extends Component {
   * e.g.
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
-  _renderRow (rowData) {
+  _renderRow(rowData) {
     return (
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{rowData.title}</Text>
@@ -82,18 +82,16 @@ class GridExample extends Component {
 
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
-  _noRowData () {
+  _noRowData() {
     return this.state.dataSource.getRowCount() === 0
   }
 
   // Render a footer.
   _renderFooter = () => {
-    return (
-      <Text> - Footer - </Text>
-    )
+    return <Text> - Footer - </Text>
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <ListView
@@ -109,15 +107,14 @@ class GridExample extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // ...redux state to props here
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+const mapDispatchToProps = dispatch => {
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridExample)

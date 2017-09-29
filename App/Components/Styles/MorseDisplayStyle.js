@@ -19,6 +19,6 @@ export default StyleSheet.create({
   waiting: {
     fontSize: 30,
     marginLeft: 10,
-    color: 'gray',
+    color: 'gray'
   }
 })

@@ -12,22 +12,26 @@ export default class SearchBar extends Component {
     searchTerm: PropTypes.string
   }
 
-  render () {
+  render() {
     const { onSearch, onCancel, searchTerm } = this.props
     const onSubmitEditing = () => onSearch(searchTerm)
     return (
       <View style={styles.container}>
-        <Icon name='search' size={Metrics.icons.tiny} style={styles.searchIcon} />
+        <Icon
+          name="search"
+          size={Metrics.icons.tiny}
+          style={styles.searchIcon}
+        />
         <TextInput
-          ref='searchText'
+          ref="searchText"
           autoFocus
-          placeholder='Search'
+          placeholder="Search"
           placeholderTextColor={Colors.snow}
-          underlineColorAndroid='transparent'
+          underlineColorAndroid="transparent"
           style={styles.searchInput}
           value={this.props.searchTerm}
           onChangeText={onSearch}
-          autoCapitalize='none'
+          autoCapitalize="none"
           onSubmitEditing={onSubmitEditing}
           returnKeyType={'search'}
           autoCorrect={false}

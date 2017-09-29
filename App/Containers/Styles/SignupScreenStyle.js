@@ -4,6 +4,6 @@ import { ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   errorText: {
-    color: 'red',
+    color: 'red'
   }
 })

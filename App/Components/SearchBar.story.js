@@ -7,18 +7,11 @@ import SearchBar from './SearchBar'
 storiesOf('SearchBar')
   .add('Default', () => (
     <View style={{ backgroundColor: 'black', height: 50 }}>
-      <SearchBar
-        onSearch={() => {}}
-        onCancel={() => {}}
-      />
+      <SearchBar onSearch={() => {}} onCancel={() => {}} />
     </View>
   ))
   .add('With Search Term', () => (
     <View style={{ backgroundColor: 'black', height: 50 }}>
-      <SearchBar
-        onSearch={() => {}}
-        onCancel={() => {}}
-        searchTerm='HELLO!!'
-      />
+      <SearchBar onSearch={() => {}} onCancel={() => {}} searchTerm="HELLO!!" />
     </View>
   ))

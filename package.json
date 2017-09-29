@@ -5,22 +5,31 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
-    "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
-    "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
+    "clean":
+      "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
+    "clean:android":
+      "cd android/ && ./gradlew clean && cd .. && react-native run-android",
+    "newclear":
+      "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
     "test:watch": "jest --watch",
     "updateSnapshot": "jest --updateSnapshot",
-    "coverage": "jest --coverage && open coverage/lcov-report/index.html || xdg-open coverage/lcov-report/index.html",
+    "coverage":
+      "jest --coverage && open coverage/lcov-report/index.html || xdg-open coverage/lcov-report/index.html",
     "android:build": "cd android && ./gradlew assembleRelease",
-    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
-    "android:hockeyapp": "cd android && ./gradlew assembleRelease && puck -submit=auto app/build/outputs/apk/app-release.apk",
+    "android:install":
+      "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
+    "android:hockeyapp":
+      "cd android && ./gradlew assembleRelease && puck -submit=auto app/build/outputs/apk/app-release.apk",
     "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
-    "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
-    "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
+    "android:logcat":
+      "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "android:shake":
+      "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
     "storybook": "storybook start -p 7007",
-    "lint": "standard --verbose | snazzy",
-    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
-    "fixcode": "standard --fix",
+    "lint": "npm run prettier | snazzy",
+    "lintdiff":
+      "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "prettier": "prettier --single-quote --no-semi --write '**/*.js'",
     "git-hook": "npm run lint -s && npm run test -s"
   },
   "dependencies": {
@@ -65,6 +74,7 @@
     "ignite-vector-icons": "^1.1.0",
     "jest": "21.1.0",
     "mockery": "^2.0.0",
+    "prettier": "^1.7.2",
     "react-addons-test-utils": "~15.4.1",
     "react-dom": "16.0.0-alpha.12",
     "react-test-renderer": "16.0.0-alpha.12",
@@ -75,17 +85,9 @@
     "standard": "10.0.2"
   },
   "jest": {
-    "testMatch": [
-      "**/Tests/**/*.js",
-      "**/?(*.)(spec|test).js?(x)"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "Tests/Setup.js"
-    ],
-    "setupFiles": [
-      "./Tests/Setup"
-    ],
+    "testMatch": ["**/Tests/**/*.js", "**/?(*.)(spec|test).js?(x)"],
+    "testPathIgnorePatterns": ["/node_modules/", "Tests/Setup.js"],
+    "setupFiles": ["./Tests/Setup"],
     "preset": "react-native"
   },
   "config": {},

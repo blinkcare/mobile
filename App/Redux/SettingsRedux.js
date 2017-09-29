@@ -13,16 +13,15 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  deviceName: "Blinky"
+  deviceName: 'Blinky'
 })
 
 /* ------------- Reducers ------------- */
 
-export const device = (state, { name }) =>
-  state.merge({ deviceName: name })
+export const device = (state, { name }) => state.merge({ deviceName: name })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UPDATE_DEVICE]: device,
+  [Types.UPDATE_DEVICE]: device
 })

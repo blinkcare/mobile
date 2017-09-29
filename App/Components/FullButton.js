@@ -10,12 +10,12 @@ import ExamplesRegistry from '../Services/ExamplesRegistry'
 
 // Ignore in coverage report
 /* istanbul ignore next */
-ExamplesRegistry.addComponentExample('Full Button', () =>
+ExamplesRegistry.addComponentExample('Full Button', () => (
   <FullButton
-    text='Hey there'
+    text="Hey there"
     onPress={() => window.alert('Full Button Pressed!')}
   />
-)
+))
 
 export default class FullButton extends Component {
   static propTypes = {
@@ -24,10 +24,15 @@ export default class FullButton extends Component {
     styles: PropTypes.object
   }
 
-  render () {
+  render() {
     return (
-      <TouchableOpacity style={[styles.button, this.props.styles]} onPress={this.props.onPress}>
-        <Text style={styles.buttonText}>{this.props.text && this.props.text.toUpperCase()}</Text>
+      <TouchableOpacity
+        style={[styles.button, this.props.styles]}
+        onPress={this.props.onPress}
+      >
+        <Text style={styles.buttonText}>
+          {this.props.text && this.props.text.toUpperCase()}
+        </Text>
       </TouchableOpacity>
     )
   }
