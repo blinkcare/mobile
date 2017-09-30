@@ -16,9 +16,7 @@ class SignupScreen extends Component {
     this.props.navigation.dispatch(resetAction)
   }
 
-  checkMismatch(e) {
-    const one = this.props.password
-    const two = this.props.passwordtwo
+  checkMismatch(one, two) {
     if (one !== two && one.length > 4 && two.length > 4) {
       this.props.setMismatch(true)
     } else {
@@ -56,8 +54,8 @@ class SignupScreen extends Component {
               secureTextEntry={true}
               value={password}
               onChangeText={a => {
-                this.checkMismatch()
                 this.props.setPassword(a)
+                this.checkMismatch(a, this.props.passwordtwo)
               }}
             />
             <FormLabel>Confirm Password</FormLabel>
@@ -65,8 +63,8 @@ class SignupScreen extends Component {
               secureTextEntry={true}
               value={passwordtwo}
               onChangeText={a => {
-                this.checkMismatch()
                 this.props.setPasswordTwo(a)
+                this.checkMismatch(this.props.passwordtwo, a)
               }}
             />
             {mismatchText}

@@ -17,7 +17,7 @@ class StartScreen extends Component {
 
   componentWillMount() {
     Parse.initialize('APPLICATION_ID')
-    Parse.serverURL = 'http://192.168.100.113:1337/parse'
+    Parse.serverURL = 'http://blinkserver.us-east-1.elasticbeanstalk.com/parse'
     Parse.User.currentAsync().then(out => {
       if (out != null) {
         this.props.navigation.navigate('MainScreen')
