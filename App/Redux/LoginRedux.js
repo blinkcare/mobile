@@ -5,7 +5,7 @@ import Parse from 'parse/react-native'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  setUsername: ['username'],
+  setName: ['name'],
   setPassword: ['password'],
   setPasswordTwo: ['passwordtwo'],
   setEmail: ['email'],
@@ -21,7 +21,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  username: '',
+  name: '',
   password: '',
   passwordtwo: '',
   email: '',
@@ -33,7 +33,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const username = (state, { username }) => state.merge({ username })
+export const name = (state, { name }) => state.merge({ name })
 
 export const error = (state, { error }) => state.merge({ error })
 
@@ -58,7 +58,7 @@ export const login = () => {
     console.log('Logging in')
     dispatch(Creators.setLogging(true))
     return new Promise((resolve, reject) => {
-      Parse.User.logIn(getState().login.username, getState().login.password, {
+      Parse.User.logIn(getState().login.name, getState().login.password, {
         success: user => {
           dispatch(Creators.setLogging(false))
           dispatch(Creators.setError(''))
@@ -80,7 +80,7 @@ export const signup = () => {
     console.log('Signing up')
     dispatch(Creators.setLogging(true))
     var user = new Parse.User()
-    user.set('username', getState().login.username)
+    user.set('name', getState().login.name)
     user.set('password', getState().login.password)
     user.set('email', getState().login.email)
     return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ export const logout = () => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_USERNAME]: username,
+  [Types.SET_NAME]: name,
   [Types.SET_PASSWORD]: password,
   [Types.SET_PASSWORD_TWO]: password2,
   [Types.SET_EMAIL]: email,

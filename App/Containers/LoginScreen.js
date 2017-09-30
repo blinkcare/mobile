@@ -26,16 +26,17 @@ class LoginScreen extends Component {
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>Email</FormLabel>
             <FormInput
-              value={this.props.username}
-              onChangeText={text => this.props.setUsername(text)}
+              keyboardType="email-address"
+              value={this.props.email}
+              onChangeText={a => this.props.setEmail(a)}
             />
             <FormLabel>Password</FormLabel>
             <FormInput
               secureTextEntry={true}
               value={this.props.password}
-              onChangeText={text => this.props.setPassword(text)}
+              onChangeText={a => this.props.setPassword(a)}
             />
             <Button
               onPress={() => {
@@ -63,13 +64,13 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { username, password, token, error } = state.login
-  return { username, password, token, error }
+  const { email, password, token, error } = state.login
+  return { email, password, token, error }
 }
 
 const mapDispatchToProps = dispatch => ({
-  setUsername: text => dispatch(LoginActions.setUsername(text)),
-  setPassword: text => dispatch(LoginActions.setPassword(text)),
+  setEmail: a => dispatch(LoginActions.setEmail(a)),
+  setPassword: a => dispatch(LoginActions.setPassword(a)),
   login: () => dispatch(login())
 })
 

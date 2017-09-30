@@ -29,7 +29,7 @@ class SignupScreen extends Component {
       error,
       passmismatch,
       email,
-      username,
+      name,
       password,
       passwordtwo
     } = this.props
@@ -39,15 +39,22 @@ class SignupScreen extends Component {
         Confirmation doesn’t match original 😬
       </Text>
     ) : null
-    const errorText = error ? <Text color="error">{error}</Text> : null
+    const errorText = error ? (
+      <Text color="error" ml={2}>
+        {error}
+      </Text>
+    ) : null
     return (
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>Name</FormLabel>
+            <FormInput value={name} onChangeText={a => this.props.setName(a)} />
+            <FormLabel>Email</FormLabel>
             <FormInput
-              value={username}
-              onChangeText={a => this.props.setUsername(a)}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={a => this.props.setEmail(a)}
             />
             <FormLabel>Password</FormLabel>
             <FormInput
@@ -68,12 +75,6 @@ class SignupScreen extends Component {
               }}
             />
             {mismatchText}
-            <FormLabel>Email</FormLabel>
-            <FormInput
-              keyboardType="email-address"
-              value={email}
-              onChangeText={a => this.props.setEmail(a)}
-            />
             <Button
               onPress={() => {
                 if (password === passwordtwo) {
@@ -105,17 +106,17 @@ class SignupScreen extends Component {
 }
 const mapStateToProps = state => {
   const {
-    username,
+    name,
     password,
     passwordtwo,
     passmismatch,
     email,
     error
   } = state.login
-  return { username, password, passwordtwo, passmismatch, email, error }
+  return { name, password, passwordtwo, passmismatch, email, error }
 }
 const mapDispatchToProps = dispatch => ({
-  setUsername: username => dispatch(LoginActions.setUsername(username)),
+  setName: name => dispatch(LoginActions.setName(name)),
   setPassword: password => dispatch(LoginActions.setPassword(password)),
   setPasswordTwo: password2 => dispatch(LoginActions.setPasswordTwo(password2)),
   setEmail: email => dispatch(LoginActions.setEmail(email)),
