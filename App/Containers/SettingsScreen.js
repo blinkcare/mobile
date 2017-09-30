@@ -49,17 +49,13 @@ class SettingsScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    deviceName: state.settings.deviceName
-  }
-}
+const mapStateToProps = state => ({
+  deviceName: state.settings.deviceName
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateDevice: text => dispatch(SettingsActions.updateDevice(text)),
-    logout: () => dispatch(logout())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  updateDevice: text => dispatch(SettingsActions.updateDevice(text)),
+  logout: () => dispatch(logout())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

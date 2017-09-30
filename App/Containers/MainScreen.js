@@ -75,18 +75,17 @@ class MainScreen extends Component {
 }
 
 const mapStateToProps = state => {
+  const { stats, characters, queue } = state.main
   return {
     deviceName: state.settings.deviceName,
-    stats: state.main.stats,
-    characters: state.main.characters,
-    queue: state.main.queue
+    stats,
+    characters,
+    queue
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getQueue: object => dispatch(getQueue(object))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getQueue: object => dispatch(getQueue(object))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen)

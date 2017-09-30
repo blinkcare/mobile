@@ -4,10 +4,7 @@ import { connect } from 'react-redux'
 import { Card, FormInput, FormLabel } from 'react-native-elements'
 import Parse from 'parse/react-native'
 import { NavigationActions } from 'react-navigation'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
 import LoginActions, { login } from '../Redux/LoginRedux'
-
-// Styles
 import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
@@ -68,20 +65,14 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    username: state.login.username,
-    password: state.login.password,
-    token: state.login.token,
-    error: state.login.error
-  }
+  const { username, password, token, error } = state.login
+  return { username, password, token, error }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setUsername: text => dispatch(LoginActions.setUsername(text)),
-    setPassword: text => dispatch(LoginActions.setPassword(text)),
-    login: () => dispatch(login())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  setUsername: text => dispatch(LoginActions.setUsername(text)),
+  setPassword: text => dispatch(LoginActions.setPassword(text)),
+  login: () => dispatch(login())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

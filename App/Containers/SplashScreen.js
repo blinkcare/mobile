@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView, Button } from 'react-native'
-import { connect } from 'react-redux'
 import Parse from 'parse/react-native'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -54,12 +53,4 @@ class SplashScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen)
+export default SplashScreen

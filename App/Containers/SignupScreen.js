@@ -105,27 +105,25 @@ class SignupScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    username: state.login.username,
-    password: state.login.password,
-    passwordtwo: state.login.passwordtwo,
-    passmismatch: state.login.passmismatch,
-    email: state.login.email,
-    error: state.login.error
-  }
+  const {
+    username,
+    password,
+    passwordtwo,
+    passmismatch,
+    email,
+    error
+  } = state.login
+  return { username, password, passwordtwo, passmismatch, email, error }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setUsername: username => dispatch(LoginActions.setUsername(username)),
-    setPassword: password => dispatch(LoginActions.setPassword(password)),
-    setPasswordTwo: password2 =>
-      dispatch(LoginActions.setPasswordTwo(password2)),
-    setEmail: email => dispatch(LoginActions.setEmail(email)),
-    signup: () => dispatch(signup()),
-    login: () => dispatch(login()),
-    setMismatch: status => dispatch(LoginActions.setMismatch(status))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  setUsername: username => dispatch(LoginActions.setUsername(username)),
+  setPassword: password => dispatch(LoginActions.setPassword(password)),
+  setPasswordTwo: password2 => dispatch(LoginActions.setPasswordTwo(password2)),
+  setEmail: email => dispatch(LoginActions.setEmail(email)),
+  signup: () => dispatch(signup()),
+  login: () => dispatch(login()),
+  setMismatch: status => dispatch(LoginActions.setMismatch(status))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)
