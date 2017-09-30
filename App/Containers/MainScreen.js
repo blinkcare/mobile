@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, View } from 'react-native'
-import { Card, Icon } from 'react-native-elements'
+import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
+import { Card, Text, Icon } from '../UI'
 import { connect } from 'react-redux'
 import timer from 'react-native-timer'
 import Parse from 'parse/react-native'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
 import MainActions, { getQueue } from '../Redux/MainRedux'
-
-// Styles
-import styles from './Styles/MainScreenStyle'
 
 // Components
 import MorseDisplay from '../Components/MorseDisplay'
@@ -19,8 +15,8 @@ class MainScreen extends Component {
     headerRight: (
       <Icon
         name="settings"
-        style={{ paddingRight: 15 }}
-        size={30}
+        pr={2}
+        size={32}
         onPress={() => navigation.navigate('SettingsScreen')}
       />
     ),
@@ -29,7 +25,7 @@ class MainScreen extends Component {
 
   componentDidMount() {
     let query = new Parse.Query('Queue')
-    query.equalTo('deviceName', this.props.deviceName) // /////////////////// ONLY WORKS ON APP RESTART /////////////////////////////
+    query.equalTo('deviceName', this.props.deviceName) // ONLY WORKS ON APP RESTART
     this.subscription = query.subscribe()
     this.subscription.on('create', object => {
       this.props.getQueue(object)
@@ -47,25 +43,17 @@ class MainScreen extends Component {
   }
 
   render() {
-    let error = null
-    if (this.props.error) {
-      error = (
-        <Text style={styles.errorText}>
-          There was an error connecting to the device.
-        </Text>
-      )
-    }
+    const { error, characters, queue, stat } = this.props
+    const errorText = error ? (
+      <Text color="error">There was an error connecting to the device.</Text>
+    ) : null
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <MorseDisplay
-              current={this.props.characters}
-              waiting={this.props.queue}
-              status={this.props.stat}
-            />
-            {error}
+            <MorseDisplay current={characters} waiting={queue} status={stat} />
+            {errorText}
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>

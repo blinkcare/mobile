@@ -3,4 +3,4 @@ export { default as Flex } from './Flex'
 export { default as Text } from './Text'
 
 export { default as Button } from './Button'
-export { colors } from './theme'
+export { default as Card } from './Card'
