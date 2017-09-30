@@ -3,7 +3,7 @@ import { View, Text, KeyboardAvoidingView } from 'react-native'
 import { Flex, Button } from '../UI'
 import Parse from 'parse/react-native'
 
-class SplashScreen extends Component {
+class StartScreen extends Component {
   static navigationOptions = {
     title: 'Blink!',
     headerLeft: null
@@ -50,4 +50,4 @@ class SplashScreen extends Component {
   }
 }
 
-export default SplashScreen
+export default StartScreen

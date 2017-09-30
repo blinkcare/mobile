@@ -34,7 +34,7 @@ class SettingsScreen extends Component {
               title="Log out"
               onPress={() => {
                 this.props.logout().then(() => {
-                  this.props.navigation.navigate('SplashScreen')
+                  this.props.navigation.navigate('StartScreen')
                 })
               }}
             />
