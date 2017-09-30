@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, KeyboardAvoidingView } from 'react-native'
-import { Button } from 'react-native-elements'
+import { Flex, Button } from '../UI'
 import Parse from 'parse/react-native'
-import { Colors } from '../Themes/'
-import styles from './Styles/SplashScreenStyle'
 
 class SplashScreen extends Component {
   static navigationOptions = {
@@ -31,22 +29,23 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <View style={styles.view}>
-        <KeyboardAvoidingView behavior="position">
-          <Button
-            onPress={() => this.props.navigation.navigate('LoginScreen')}
-            title="Log in"
-            backgroundColor={Colors.grey}
-            style={styles.login}
-          />
-          <Button
-            onPress={() => this.props.navigation.navigate('SignupScreen')}
-            title="Sign up"
-            backgroundColor={Colors.blue}
-            style={styles.signup}
-          />
-        </KeyboardAvoidingView>
-      </View>
+      <Flex
+        flexDirection="column"
+        justifyContent="center"
+        style={{ height: '100%' }}
+      >
+        <Button
+          onPress={() => this.props.navigation.navigate('LoginScreen')}
+          title="Log in"
+          bg="secondary"
+          mb={2}
+        />
+        <Button
+          onPress={() => this.props.navigation.navigate('SignupScreen')}
+          title="Sign up"
+          bg="primary"
+        />
+      </Flex>
     )
   }
 }

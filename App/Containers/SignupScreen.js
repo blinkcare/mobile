@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, FormInput, FormLabel } from 'react-native-elements'
+import { Text, Button } from '../UI'
 import Parse from 'parse/react-native'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
 import LoginActions, { signup, login } from '../Redux/LoginRedux'
-
-// Styles
-import styles from './Styles/SignupScreenStyle'
+import styled from 'styled-components/native'
 
 class SignupScreen extends Component {
   resetNavigation(targetRoute) {
@@ -22,7 +20,7 @@ class SignupScreen extends Component {
     var mismatch = null
     if (this.props.passmismatch) {
       mismatch = (
-        <Text style={styles.errorText}>
+        <Text color="error" mt={2}>
           There was a mismatch of the passwords.
         </Text>
       )
@@ -30,11 +28,11 @@ class SignupScreen extends Component {
 
     var error = null
     if (this.props.error) {
-      error = <Text style={styles.errorText}>{this.props.error}</Text>
+      error = <Text color="error">{this.props.error}</Text>
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Username</FormLabel>
@@ -92,8 +90,8 @@ class SignupScreen extends Component {
                   this.props.setMismatch(true)
                 }
               }}
-              title="Submit"
-              style={styles.signup}
+              title="Create account"
+              my={2}
             />
             {mismatch}
             {error}

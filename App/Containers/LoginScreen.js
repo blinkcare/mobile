@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, FormInput, FormLabel } from 'react-native-elements'
+import { Text, Button } from '../UI'
 import Parse from 'parse/react-native'
 import { NavigationActions } from 'react-navigation'
 import LoginActions, { login } from '../Redux/LoginRedux'
-import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
   resetNavigation(targetRoute) {
@@ -19,11 +19,11 @@ class LoginScreen extends Component {
   render() {
     var error = null
     if (this.props.error) {
-      error = <Text style={styles.errorText}>{this.props.error}</Text>
+      error = <Text color="error">{this.props.error}</Text>
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Username</FormLabel>
@@ -51,8 +51,8 @@ class LoginScreen extends Component {
                   })
                   .catch(() => {})
               }}
-              title="Submit"
-              style={styles.signup}
+              title="Sign in"
+              my={2}
             />
             {error}
           </Card>

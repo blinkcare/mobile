@@ -2,6 +2,8 @@ import '../Config'
 import DebugConfig from '../Config/DebugConfig'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
+import theme from '../UI/theme'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 
@@ -20,9 +22,11 @@ const store = createStore()
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <RootContainer />
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <RootContainer />
+        </Provider>
+      </ThemeProvider>
     )
   }
 }
