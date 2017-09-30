@@ -7,7 +7,6 @@ function swap(json) {
   for (var key in json) {
     ret[json[key]] = key
   }
-  console.log(ret)
   return ret
 }
 
@@ -76,7 +75,6 @@ export const setq = (state, { queue }) => state.merge({ queue: queue })
 export const getQueue = object => {
   return (dispatch, getState) => {
     let queue = object.get('queue')
-    console.log(queue)
     let started = object.get('started')
     dispatch(Creators.setStats(started))
 

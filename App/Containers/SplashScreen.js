@@ -20,12 +20,10 @@ class SplashScreen extends Component {
   }
 
   componentWillMount() {
-    console.log('Initializing')
     Parse.initialize('APPLICATION_ID')
     Parse.serverURL = 'http://192.168.100.113:1337/parse'
     Parse.User.currentAsync().then(out => {
       if (out != null) {
-        console.log(out)
         this.props.navigation.navigate('MainScreen')
       }
     })

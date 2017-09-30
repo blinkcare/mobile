@@ -11,7 +11,6 @@ import styles from './Styles/SettingsScreenStyle'
 
 class SettingsScreen extends Component {
   resetNavigation(targetRoute) {
-    console.log('Navigating')
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: targetRoute })]

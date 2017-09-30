@@ -35,7 +35,6 @@ class MainScreen extends Component {
       this.props.getQueue(object)
     })
     this.subscription.on('update', object => {
-      console.log(object)
       this.props.getQueue(object)
     })
     this.subscription.on('enter', object => {
@@ -56,8 +55,6 @@ class MainScreen extends Component {
         </Text>
       )
     }
-
-    console.log(this.props)
 
     return (
       <ScrollView style={styles.container}>

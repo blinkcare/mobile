@@ -9,7 +9,6 @@ import styles from './Styles/LoginScreenStyle'
 
 class LoginScreen extends Component {
   resetNavigation(targetRoute) {
-    console.log('Navigating')
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName: targetRoute })]
@@ -19,7 +18,6 @@ class LoginScreen extends Component {
 
   render() {
     var error = null
-    console.log(this.props.error)
     if (this.props.error) {
       error = <Text style={styles.errorText}>{this.props.error}</Text>
     }
