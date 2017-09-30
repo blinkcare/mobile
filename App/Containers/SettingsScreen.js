@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, FormLabel, FormInput } from 'react-native-elements'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
+import { FormLabel, FormInput } from 'react-native-elements'
+import { Card, Button } from '../UI'
 import SettingsActions from '../Redux/SettingsRedux'
 import { logout } from '../Redux/LoginRedux'
-
-// Styles
-import styles from './Styles/SettingsScreenStyle'
 
 class SettingsScreen extends Component {
   resetNavigation(targetRoute) {
@@ -24,7 +21,7 @@ class SettingsScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Device Name</FormLabel>
@@ -33,7 +30,7 @@ class SettingsScreen extends Component {
               onChangeText={text => this.props.updateDevice(text)}
             />
             <Button
-              style={styles.logoutBtn}
+              bg="red"
               title="Log out"
               onPress={() => {
                 this.props.logout().then(() => {
