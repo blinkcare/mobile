@@ -1,3 +1,4 @@
+// imported from ignite
 const type = {
   base: 'Avenir-Book',
   bold: 'Avenir-Black',

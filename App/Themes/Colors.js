@@ -1,4 +1,17 @@
 const colors = {
+  red: '#ff4949',
+  green: '#20ee94',
+  blue: '#207aee',
+
+  bg: '#f4f4f6',
+
+  black: '#273444',
+  grey: '#8492a6',
+  smoke: '#e0e6ed',
+  snow: '#f9fafc',
+  white: '#ffffff',
+
+  // from ignite
   background: '#1F0808',
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',
@@ -14,7 +27,6 @@ const colors = {
   charcoal: '#595959',
   coal: '#2d2d2d',
   bloodOrange: '#fb5f26',
-  snow: 'white',
   ember: 'rgba(164, 0, 48, 0.5)',
   fire: '#e73536',
   drawer: 'rgba(30, 30, 29, 0.95)',
