@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../../Themes/'
+import { colors } from '../../UI/theme'
 
 export default StyleSheet.create({
   header: {
-    backgroundColor: Colors.blue
+    backgroundColor: colors.blue
   },
   white: {
-    color: Colors.white
+    color: colors.white
   }
 })
