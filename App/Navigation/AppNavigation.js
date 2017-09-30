@@ -10,8 +10,14 @@ import styles from './Styles/NavigationStyles'
 // Manifest of possible screens
 const PrimaryNav = StackNavigator(
   {
-    SignupScreen: { screen: SignupScreen },
-    LoginScreen: { screen: LoginScreen },
+    SignupScreen: {
+      screen: SignupScreen,
+      navigationOptions: { title: 'Sign up' }
+    },
+    LoginScreen: {
+      screen: LoginScreen,
+      navigationOptions: { title: 'Sign in' }
+    },
     StartScreen: { screen: StartScreen },
     SettingsScreen: { screen: SettingsScreen },
     MainScreen: { screen: MainScreen }

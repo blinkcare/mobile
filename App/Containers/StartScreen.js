@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView } from 'react-native'
-import { Flex, Button } from '../UI'
+import { Flex, Text, Button } from '../UI'
 import Parse from 'parse/react-native'
 
 class StartScreen extends Component {
   static navigationOptions = {
-    title: 'Blink!',
-    headerLeft: null
+    header: null
   }
 
   resetNavigation(targetRoute) {
@@ -32,18 +30,24 @@ class StartScreen extends Component {
       <Flex
         flexDirection="column"
         justifyContent="center"
+        bg="primary"
         style={{ height: '100%' }}
       >
+        <Text f={6} fontWeight="bold" color="white" align="center" mb={2}>
+          Blink!
+        </Text>
         <Button
           onPress={() => this.props.navigation.navigate('LoginScreen')}
-          title="Log in"
+          title="Sign in"
           bg="secondary"
           mb={2}
         />
         <Button
           onPress={() => this.props.navigation.navigate('SignupScreen')}
-          title="Sign up"
-          bg="primary"
+          title="Get started"
+          bg="white"
+          color="primary"
+          fontWeight="bold"
         />
       </Flex>
     )
