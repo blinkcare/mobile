@@ -16,65 +16,69 @@ class SignupScreen extends Component {
     this.props.navigation.dispatch(resetAction)
   }
 
+  checkMismatch(e) {
+    const one = this.props.password
+    const two = this.props.passwordtwo
+    if (one !== two && one.length > 4 && two.length > 4) {
+      this.props.setMismatch(true)
+    } else {
+      this.props.setMismatch(false)
+    }
+  }
+
   render() {
-    var mismatch = null
-    if (this.props.passmismatch) {
-      mismatch = (
-        <Text color="error" mt={2}>
-          There was a mismatch of the passwords.
-        </Text>
-      )
-    }
+    const {
+      error,
+      passmismatch,
+      email,
+      username,
+      password,
+      passwordtwo
+    } = this.props
 
-    var error = null
-    if (this.props.error) {
-      error = <Text color="error">{this.props.error}</Text>
-    }
-
+    const mismatchText = passmismatch ? (
+      <Text color="error" mt={1} ml={2}>
+        Confirmation doesn’t match original 😬
+      </Text>
+    ) : null
+    const errorText = error ? <Text color="error">{error}</Text> : null
     return (
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>Username</FormLabel>
             <FormInput
-              value={this.props.username}
-              onChangeText={text => this.props.setUsername(text)}
+              value={username}
+              onChangeText={a => this.props.setUsername(a)}
             />
             <FormLabel>Password</FormLabel>
             <FormInput
               secureTextEntry={true}
-              value={this.props.password}
-              onChangeText={text => {
-                if (this.props.password === this.props.passwordtwo) {
-                  this.props.setMismatch(false)
-                } else {
-                  this.props.setMismatch(true)
-                }
-                this.props.setPassword(text)
+              value={password}
+              onChangeText={a => {
+                this.checkMismatch()
+                this.props.setPassword(a)
               }}
             />
             <FormLabel>Confirm Password</FormLabel>
             <FormInput
               secureTextEntry={true}
-              value={this.props.passwordtwo}
-              onChangeText={text => {
-                if (this.props.password === this.props.passwordtwo) {
-                  this.props.setMismatch(false)
-                } else {
-                  this.props.setMismatch(true)
-                }
-                this.props.setPasswordTwo(text)
+              value={passwordtwo}
+              onChangeText={a => {
+                this.checkMismatch()
+                this.props.setPasswordTwo(a)
               }}
             />
+            {mismatchText}
             <FormLabel>Email</FormLabel>
             <FormInput
               keyboardType="email-address"
-              value={this.props.email}
-              onChangeText={text => this.props.setEmail(text)}
+              value={email}
+              onChangeText={a => this.props.setEmail(a)}
             />
             <Button
               onPress={() => {
-                if (this.props.password === this.props.passwordtwo) {
+                if (password === passwordtwo) {
                   Parse.User.currentAsync().then(out => {
                     if (out) {
                       Parse.User.logOut()
@@ -91,17 +95,16 @@ class SignupScreen extends Component {
                 }
               }}
               title="Create account"
+              disabled={passmismatch}
               my={2}
             />
-            {mismatch}
-            {error}
+            {errorText}
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>
     )
   }
 }
-
 const mapStateToProps = state => {
   const {
     username,
@@ -113,7 +116,6 @@ const mapStateToProps = state => {
   } = state.login
   return { username, password, passwordtwo, passmismatch, email, error }
 }
-
 const mapDispatchToProps = dispatch => ({
   setUsername: username => dispatch(LoginActions.setUsername(username)),
   setPassword: password => dispatch(LoginActions.setPassword(password)),
@@ -123,5 +125,4 @@ const mapDispatchToProps = dispatch => ({
   login: () => dispatch(login()),
   setMismatch: status => dispatch(LoginActions.setMismatch(status))
 })
-
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)
