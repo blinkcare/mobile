@@ -19,17 +19,13 @@ const store = createStore()
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-class App extends Component {
-  render() {
-    return (
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <RootContainer />
-        </Provider>
-      </ThemeProvider>
-    )
-  }
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <RootContainer />
+    </Provider>
+  </ThemeProvider>
+)
 
 // allow reactotron overlay for fast design in dev mode
 export default (DebugConfig.useReactotron ? console.tron.overlay(App) : App)
