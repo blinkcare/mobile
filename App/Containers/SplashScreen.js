@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView, Button } from 'react-native'
+import { View, Text, KeyboardAvoidingView } from 'react-native'
+import { Button } from 'react-native-elements'
 import Parse from 'parse/react-native'
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-
-// Styles
+import { Colors } from '../Themes/'
 import styles from './Styles/SplashScreenStyle'
 
 class SplashScreen extends Component {
@@ -39,12 +37,14 @@ class SplashScreen extends Component {
         <KeyboardAvoidingView behavior="position">
           <Button
             onPress={() => this.props.navigation.navigate('LoginScreen')}
-            title="Login"
+            title="Log in"
+            backgroundColor={Colors.grey}
             style={styles.login}
           />
           <Button
             onPress={() => this.props.navigation.navigate('SignupScreen')}
-            title="Signup"
+            title="Sign up"
+            backgroundColor={Colors.blue}
             style={styles.signup}
           />
         </KeyboardAvoidingView>
