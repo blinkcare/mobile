@@ -6,6 +6,8 @@ import { space, alignSelf } from 'styled-system'
 
 const Base = styled(Element)([], space, alignSelf)
 
-const Icon = ({ color, ...props }) => <Base {...props} />
+const Icon = ({ color, ...props }) => (
+  <Base color={getColor(color)} {...props} />
+)
 
 export default Icon
