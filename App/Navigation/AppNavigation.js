@@ -4,7 +4,6 @@ import LoginScreen from '../Containers/LoginScreen'
 import SplashScreen from '../Containers/SplashScreen'
 import SettingsScreen from '../Containers/SettingsScreen'
 import MainScreen from '../Containers/MainScreen'
-import LaunchScreen from '../Containers/LaunchScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -22,7 +21,10 @@ const PrimaryNav = StackNavigator(
     headerMode: 'float',
     initialRouteName: 'SplashScreen',
     navigationOptions: {
-      headerStyle: styles.header
+      headerStyle: styles.header,
+      headerTitleStyle: styles.white,
+      headerBackTitleStyle: styles.white,
+      headerTintColor: styles.white
     }
   }
 )

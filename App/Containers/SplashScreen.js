@@ -7,8 +7,7 @@ import styles from './Styles/SplashScreenStyle'
 
 class SplashScreen extends Component {
   static navigationOptions = {
-    title: 'Blink!',
-    headerLeft: null
+    title: 'Blink!'
   }
 
   resetNavigation(targetRoute) {
