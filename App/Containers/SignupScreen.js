@@ -5,9 +5,11 @@ import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
 import Parse from 'parse/react-native'
 import LoginActions, { signup, login } from '../Redux/LoginRedux'
+import { NavigationActions } from 'react-navigation'
 import styled from 'styled-components/native'
 
 class SignupScreen extends Component {
+
   resetNavigation(targetRoute) {
     const resetAction = NavigationActions.reset({
       index: 0,

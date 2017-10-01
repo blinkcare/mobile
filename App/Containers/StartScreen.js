@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Flex, Text, Button } from '../UI'
 import Parse from 'parse/react-native'
+import { NavigationActions } from 'react-navigation'
 
 class StartScreen extends Component {
   static navigationOptions = {

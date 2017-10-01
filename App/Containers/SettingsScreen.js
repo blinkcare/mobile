@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { FormLabel, FormInput } from 'react-native-elements'
 import { Card, Button } from '../UI'
 import SettingsActions from '../Redux/SettingsRedux'
+import { NavigationActions } from 'react-navigation'
 import { logout } from '../Redux/LoginRedux'
 
 class SettingsScreen extends Component {
@@ -34,7 +35,7 @@ class SettingsScreen extends Component {
               title="Log out"
               onPress={() => {
                 this.props.logout().then(() => {
-                  this.props.navigation.navigate('StartScreen')
+                  this.resetNavigation('StartScreen')
                 })
               }}
             />
