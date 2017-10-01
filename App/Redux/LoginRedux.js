@@ -83,6 +83,7 @@ export const signup = () => {
     user.set('name', getState().login.name)
     user.set('password', getState().login.password)
     user.set('username', getState().login.email)
+    user.set('email', getState().login.email)
     return new Promise((resolve, reject) => {
       user.signUp(null, {
         success: user => {

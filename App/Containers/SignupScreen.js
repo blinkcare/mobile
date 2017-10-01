@@ -88,7 +88,7 @@ class SignupScreen extends Component {
                   this.props
                     .signup()
                     .then(() => {
-                      this.resetNavigation('MainScreen')
+                      this.props.setError("Now verify your email by clicking on the link in the email sent to you.")
                     })
                     .catch(() => {})
                 } else {
@@ -124,6 +124,7 @@ const mapDispatchToProps = dispatch => ({
   setEmail: email => dispatch(LoginActions.setEmail(email)),
   signup: () => dispatch(signup()),
   login: () => dispatch(login()),
-  setMismatch: status => dispatch(LoginActions.setMismatch(status))
+  setMismatch: status => dispatch(LoginActions.setMismatch(status)),
+  setError: error => dispatch(LoginActions.setError(error))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen)
