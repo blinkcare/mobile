@@ -48,7 +48,7 @@ class SignupScreen extends Component {
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>First Name</FormLabel>
             <FormInput value={name} onChangeText={a => this.props.setName(a)} />
             <FormLabel>Email</FormLabel>
             <FormInput

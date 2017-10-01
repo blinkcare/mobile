@@ -58,7 +58,7 @@ export const login = () => {
     console.log('Logging in')
     dispatch(Creators.setLogging(true))
     return new Promise((resolve, reject) => {
-      Parse.User.logIn(getState().login.name, getState().login.password, {
+      Parse.User.logIn(getState().login.email, getState().login.password, {
         success: user => {
           dispatch(Creators.setLogging(false))
           dispatch(Creators.setError(''))
@@ -82,7 +82,7 @@ export const signup = () => {
     var user = new Parse.User()
     user.set('name', getState().login.name)
     user.set('password', getState().login.password)
-    user.set('email', getState().login.email)
+    user.set('username', getState().login.email)
     return new Promise((resolve, reject) => {
       user.signUp(null, {
         success: user => {
