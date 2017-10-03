@@ -9,7 +9,6 @@ import { NavigationActions } from 'react-navigation'
 import styled from 'styled-components/native'
 
 class SignupScreen extends Component {
-
   resetNavigation(targetRoute) {
     const resetAction = NavigationActions.reset({
       index: 0,
@@ -88,7 +87,9 @@ class SignupScreen extends Component {
                   this.props
                     .signup()
                     .then(() => {
-                      this.props.setError("Now verify your email by clicking on the link in the email sent to you.")
+                      this.props.setError(
+                        'Now verify your email by clicking on the link in the email sent to you.'
+                      )
                     })
                     .catch(() => {})
                 } else {

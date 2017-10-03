@@ -3,11 +3,12 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
-import Parse from 'parse/react-native'
-import { NavigationActions } from 'react-navigation'
-import LoginActions, { login, reset } from '../Redux/LoginRedux'
+import LoginActions, { reset } from '../Redux/LoginRedux'
 
-class LoginScreen extends Component {
+const successMessage =
+  'Your password was successfully reset. Check your email for a link on reset it.'
+
+class ResetScreen extends Component {
   resetNavigation(targetRoute) {
     const resetAction = NavigationActions.reset({
       index: 0,
@@ -18,7 +19,9 @@ class LoginScreen extends Component {
 
   render() {
     var error = null
-    if (this.props.error) {
+    if (this.props.error == successMessage) {
+      error = <Text color="black">{this.props.error}</Text>
+    } else if (this.props.error) {
       error = <Text color="error">{this.props.error}</Text>
     }
 
@@ -26,40 +29,24 @@ class LoginScreen extends Component {
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>
+              Enter your email. If it matches an account, a reset password link
+              will be sent to you.
+            </FormLabel>
             <FormInput
               keyboardType="email-address"
               value={this.props.email}
               onChangeText={a => this.props.setEmail(a)}
             />
-            <FormLabel>Password</FormLabel>
-            <FormInput
-              secureTextEntry={true}
-              value={this.props.password}
-              onChangeText={a => this.props.setPassword(a)}
-            />
             <Button
               onPress={() => {
-                Parse.User.currentAsync().then(out => {
-                  if (out) {
-                    Parse.User.logOut()
-                  }
-                })
                 this.props
-                  .login()
-                  .then(() => {
-                    this.resetNavigation('MainScreen')
-                  })
+                  .reset()
+                  .then(this.props.setError(successMessage))
                   .catch(() => {})
               }}
-              title="Sign in"
+              title="Reset Password"
               my={2}
-            />
-            <Button
-              title="Reset password"
-              onPress={() => {
-                this.props.navigation.navigate('ResetScreen')
-              }}
             />
             {error}
           </Card>
@@ -70,15 +57,14 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { email, password, token, error } = state.login
-  return { email, password, token, error }
+  const { email, error } = state.login
+  return { email, error }
 }
 
 const mapDispatchToProps = dispatch => ({
   setEmail: a => dispatch(LoginActions.setEmail(a)),
-  setPassword: a => dispatch(LoginActions.setPassword(a)),
-  login: () => dispatch(login()),
+  setError: a => dispatch(LoginActions.setError(a)),
   reset: () => dispatch(reset())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ResetScreen)

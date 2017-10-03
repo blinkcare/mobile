@@ -112,6 +112,26 @@ export const logout = () => {
   }
 }
 
+export const reset = () => {
+  return (dispatch, getState) => {
+    console.log('Resetting password')
+    dispatch(Creators.setLogging(true))
+    return new Promise((resolve, reject) => {
+      Parse.User.requestPasswordReset(getState().login.email, {
+        success: user => {
+          dispatch(Creators.setLogging(false))
+          resolve()
+        },
+        error: (user, error) => {
+          dispatch(Creators.setError(error.message))
+          dispatch(Creators.setLogging(false))
+          reject()
+        }
+      })
+    })
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {

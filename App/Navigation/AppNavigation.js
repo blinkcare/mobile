@@ -1,4 +1,5 @@
 import { StackNavigator } from 'react-navigation'
+import ResetScreen from '../Containers/ResetScreen'
 import SignupScreen from '../Containers/SignupScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import StartScreen from '../Containers/StartScreen'
@@ -20,7 +21,8 @@ const PrimaryNav = StackNavigator(
     },
     StartScreen: { screen: StartScreen },
     SettingsScreen: { screen: SettingsScreen },
-    MainScreen: { screen: MainScreen }
+    MainScreen: { screen: MainScreen },
+    ResetScreen: { screen: ResetScreen }
   },
   {
     // Default config for all screens
