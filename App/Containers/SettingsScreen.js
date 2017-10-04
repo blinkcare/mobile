@@ -31,8 +31,9 @@ class SettingsScreen extends Component {
               onChangeText={text => this.props.updateDevice(text)}
             />
             <Button
-              bg="red"
+              bg="danger"
               title="Log out"
+              my={2}
               onPress={() => {
                 this.props.logout().then(() => {
                   this.resetNavigation('StartScreen')
