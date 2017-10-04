@@ -39,6 +39,9 @@ class LoginScreen extends Component {
               placeholder="••••••••"
             />
             <Button
+              title="Sign in"
+              mt={2}
+              fontWeight="bold"
               onPress={() => {
                 Parse.User.currentAsync().then(out => {
                   if (out) {
@@ -52,11 +55,12 @@ class LoginScreen extends Component {
                   })
                   .catch(() => {})
               }}
-              title="Sign in"
-              my={2}
             />
             <Button
               title="Reset password"
+              bg="secondary"
+              mt={1}
+              mb={2}
               onPress={() => {
                 this.props.navigation.navigate('ResetScreen')
               }}
