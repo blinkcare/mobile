@@ -15,8 +15,8 @@ class MainScreen extends Component {
     headerRight: (
       <Icon
         name="settings"
-        pr={2}
-        size={32}
+        mx={2}
+        size={28}
         onPress={() => navigation.navigate('SettingsScreen')}
       />
     ),
