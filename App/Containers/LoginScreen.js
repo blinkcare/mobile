@@ -31,12 +31,14 @@ class LoginScreen extends Component {
               keyboardType="email-address"
               value={this.props.email}
               onChangeText={a => this.props.setEmail(a)}
+              placeholder="hello@example.com"
             />
             <FormLabel>Password</FormLabel>
             <FormInput
               secureTextEntry={true}
               value={this.props.password}
               onChangeText={a => this.props.setPassword(a)}
+              placeholder="••••••••"
             />
             <Button
               onPress={() => {
