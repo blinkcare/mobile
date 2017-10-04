@@ -63,7 +63,7 @@ class SignupScreen extends Component {
                 this.props.setEmail(a)
               }}
             />
-            <FormLabel>Password</FormLabel>
+            <FormLabel>Password (Must contain at least 8 characters, with 1 lowercase character, 1 uppercase character, and 1 digit)</FormLabel>
             <FormInput
               secureTextEntry={true}
               value={password}
