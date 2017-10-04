@@ -17,12 +17,16 @@ class ResetScreen extends Component {
     this.props.navigation.dispatch(resetAction)
   }
 
+  componentWillUnmount() {
+    this.props.setError('')
+  }
+
   render() {
     var error = null
-    if (this.props.error == successMessage) {
-      error = <Text color="black">{this.props.error}</Text>
-    } else if (this.props.error) {
-      error = <Text color="error">{this.props.error}</Text>
+    if (this.props.resetError == successMessage) {
+      error = <Text color="black">{this.props.resetError}</Text>
+    } else if (this.props.resetError) {
+      error = <Text color="error">{this.props.resetError}</Text>
     }
 
     return (
@@ -36,7 +40,10 @@ class ResetScreen extends Component {
             <FormInput
               keyboardType="email-address"
               value={this.props.email}
-              onChangeText={a => this.props.setEmail(a)}
+              onChangeText={a => {
+                this.props.setError('')
+                this.props.setEmail(a)
+              }}
             />
             <Button
               onPress={() => {
@@ -57,13 +64,13 @@ class ResetScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const { email, error } = state.login
-  return { email, error }
+  const { email, resetError } = state.login
+  return { email, resetError }
 }
 
 const mapDispatchToProps = dispatch => ({
   setEmail: a => dispatch(LoginActions.setEmail(a)),
-  setError: a => dispatch(LoginActions.setError(a)),
+  setError: a => dispatch(LoginActions.setResetError(a)),
   reset: () => dispatch(reset())
 })
 

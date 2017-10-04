@@ -50,18 +50,25 @@ class SignupScreen extends Component {
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>First Name</FormLabel>
-            <FormInput value={name} onChangeText={a => this.props.setName(a)} />
+            <FormInput value={name} onChangeText={a => {
+              this.props.setError('')
+              this.props.setName(a)
+            }} />
             <FormLabel>Email</FormLabel>
             <FormInput
               keyboardType="email-address"
               value={email}
-              onChangeText={a => this.props.setEmail(a)}
+              onChangeText={a => {
+                this.props.setError('')
+                this.props.setEmail(a)
+              }}
             />
             <FormLabel>Password</FormLabel>
             <FormInput
               secureTextEntry={true}
               value={password}
               onChangeText={a => {
+                this.props.setError('')
                 this.props.setPassword(a)
                 this.checkMismatch(a, this.props.passwordtwo)
               }}
@@ -71,6 +78,7 @@ class SignupScreen extends Component {
               secureTextEntry={true}
               value={passwordtwo}
               onChangeText={a => {
+                this.props.setError('')
                 this.props.setPasswordTwo(a)
                 this.checkMismatch(this.props.passwordtwo, a)
               }}

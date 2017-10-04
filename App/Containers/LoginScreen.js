@@ -5,7 +5,7 @@ import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
 import Parse from 'parse/react-native'
 import { NavigationActions } from 'react-navigation'
-import LoginActions, { login, reset } from '../Redux/LoginRedux'
+import LoginActions, { login } from '../Redux/LoginRedux'
 
 class LoginScreen extends Component {
   resetNavigation(targetRoute) {
@@ -28,14 +28,20 @@ class LoginScreen extends Component {
             <FormInput
               keyboardType="email-address"
               value={this.props.email}
-              onChangeText={a => this.props.setEmail(a)}
+              onChangeText={a => {
+                this.props.setError('')
+                this.props.setEmail(a)
+              }}
               placeholder="hello@example.com"
             />
             <FormLabel>Password</FormLabel>
             <FormInput
               secureTextEntry={true}
               value={this.props.password}
-              onChangeText={a => this.props.setPassword(a)}
+              onChangeText={a => {
+                this.props.setError('')
+                this.props.setPassword(a)
+              }}
               placeholder="••••••••"
             />
             <Button
@@ -81,8 +87,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   setEmail: a => dispatch(LoginActions.setEmail(a)),
   setPassword: a => dispatch(LoginActions.setPassword(a)),
-  login: () => dispatch(login()),
-  reset: () => dispatch(reset())
+  setError: a => dispatch(LoginActions.setError(a)),
+  login: () => dispatch(login())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

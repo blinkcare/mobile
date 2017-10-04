@@ -12,7 +12,8 @@ const { Types, Creators } = createActions({
   setToken: ['token'],
   setLogging: ['state'],
   setMismatch: ['status'],
-  setError: ['error']
+  setError: ['error'],
+  setResetError: ['error']
 })
 
 export const LoginTypes = Types
@@ -28,7 +29,8 @@ export const INITIAL_STATE = Immutable({
   token: '',
   logging: false,
   passmismatch: false,
-  error: ''
+  error: '',
+  resetError: '',
 })
 
 /* ------------- Reducers ------------- */
@@ -36,6 +38,8 @@ export const INITIAL_STATE = Immutable({
 export const name = (state, { name }) => state.merge({ name })
 
 export const error = (state, { error }) => state.merge({ error })
+
+export const resetErr = (state, { error }) => state.merge({ resetError: error })
 
 export const password = (state, { password }) => state.merge({ password })
 
@@ -114,6 +118,7 @@ export const logout = () => {
 
 export const reset = () => {
   return (dispatch, getState) => {
+    console.log(getState().login.email)
     console.log('Resetting password')
     dispatch(Creators.setLogging(true))
     return new Promise((resolve, reject) => {
@@ -142,5 +147,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_TOKEN]: token,
   [Types.SET_LOGGING]: logging,
   [Types.SET_MISMATCH]: mismatch,
-  [Types.SET_ERROR]: error
+  [Types.SET_ERROR]: error,
+  [Types.SET_RESET_ERROR]: resetErr
 })
