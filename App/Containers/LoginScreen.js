@@ -17,10 +17,8 @@ class LoginScreen extends Component {
   }
 
   render() {
-    var error = null
-    if (this.props.error) {
-      error = <Text color="error">{this.props.error}</Text>
-    }
+    const { error } = this.props
+    const errorText = error ? <Text color="error" children={error} /> : null
 
     return (
       <ScrollView>
@@ -63,7 +61,7 @@ class LoginScreen extends Component {
                 this.props.navigation.navigate('ResetScreen')
               }}
             />
-            {error}
+            {errorText}
           </Card>
         </KeyboardAvoidingView>
       </ScrollView>
