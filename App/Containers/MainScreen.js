@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
-import { Card, Text, Icon } from '../UI'
+import { ScrollView, View } from 'react-native'
+import { Box, Card, Text, Icon } from '../UI'
 import { connect } from 'react-redux'
 import timer from 'react-native-timer'
 import Parse from 'parse/react-native'
@@ -43,19 +43,20 @@ class MainScreen extends Component {
   }
 
   render() {
-    const { error, characters, queue, stat } = this.props
+    const { error, characters, queue, stat, deviceName } = this.props
     const errorText = error ? (
       <Text color="error">There was an error connecting to the device.</Text>
     ) : null
 
     return (
-      <ScrollView>
-        <KeyboardAvoidingView behavior="position">
-          <Card>
-            <MorseDisplay current={characters} waiting={queue} status={stat} />
-            {errorText}
-          </Card>
-        </KeyboardAvoidingView>
+      <ScrollView p={2}>
+        <Box pt={3} px={2}>
+          <Text fontWeight="bold" f={4} color="slate" children={deviceName} />
+        </Box>
+        <Card mt={0}>
+          <MorseDisplay current={characters} waiting={queue} status={stat} />
+          {errorText}
+        </Card>
       </ScrollView>
     )
   }
