@@ -32,6 +32,7 @@ class LoginScreen extends Component {
                 this.props.setError('')
                 this.props.setEmail(a)
               }}
+              autoCapitalize='none'
               placeholder="hello@example.com"
             />
             <FormLabel>Password</FormLabel>

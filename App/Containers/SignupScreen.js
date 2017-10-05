@@ -62,6 +62,7 @@ class SignupScreen extends Component {
                 this.props.setError('')
                 this.props.setEmail(a)
               }}
+              autoCapitalize='none'
             />
             <FormLabel>Password (Must contain at least 8 characters, with 1 lowercase character, 1 uppercase character, and 1 digit)</FormLabel>
             <FormInput
