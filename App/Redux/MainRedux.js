@@ -45,9 +45,9 @@ let morseAlphabet = {
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  setChars: ['chars'],
-  setStats: ['stat'],
-  setQueue: ['queue']
+  setChars: ['device', 'chars'],
+  setStats: ['device', 'stat'],
+  setQueue: ['device', 'queue']
 })
 
 export const MainTypes = Types
@@ -56,34 +56,46 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  characters: '',
-  stat: false,
-  queue: '',
-  morse: swap(morseAlphabet)
+  morse: swap(morseAlphabet),
+  totalObj: {}
 })
 
 /* ------------- Reducers ------------- */
 
-export const setchar = (state, { chars }) => state.merge({ characters: chars })
+export const setchar = (state, { device, chars }) => {
+  let s = {totalObj: {}}
+  s.totalObj[device] = {characters: chars}
+  return state.merge(s, {deep: true})
+}
 
-export const setstat = (state, { stat }) => state.merge({ stat })
+export const setstat = (state, { device, stat }) => {
+  let s = {totalObj: {}}
+  s.totalObj[device] = {stat}
+  return state.merge(s, {deep: true})
+}
 
-export const setq = (state, { queue }) => state.merge({ queue: queue })
+export const setq = (state, { device, queue }) => {
+  let s = {totalObj: {}}
+  s.totalObj[device] = {queue}
+  return state.merge(s, {deep: true})
+}
+
 
 /* ------------- Thunk Actions ------------- */
 
 export const getQueue = object => {
   return (dispatch, getState) => {
+    let device = object.get('deviceName')
     let queue = object.get('queue')
     let started = object.get('started')
-    dispatch(Creators.setStats(started))
+
+    dispatch(Creators.setStats(device, started))
 
     let chars = ''
 
     let individual = queue.split('|')
 
     if (started) {
-      dispatch(Creators.setStats(true))
       for (let i = 0; i < individual.length; i++) {
         if (!(individual[i] == '')) {
           if (individual[i] in getState().main.morse) {
@@ -96,16 +108,15 @@ export const getQueue = object => {
           }
         }
         if (queue[queue.length - 1] == '|') {
-          dispatch(Creators.setQueue(''))
+          dispatch(Creators.setQueue(device, ''))
         }
       }
 
-      dispatch(Creators.setChars(chars))
+      dispatch(Creators.setChars(device, chars))
     } else {
-      dispatch(Creators.setStats(false))
-      dispatch(Creators.setChars(''))
+      dispatch(Creators.setChars(device, ''))
     }
-    dispatch(Creators.setQueue(individual[individual.length - 1]))
+    dispatch(Creators.setQueue(device, individual[individual.length - 1]))
   }
 }
 

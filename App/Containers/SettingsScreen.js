@@ -3,7 +3,6 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormLabel, FormInput } from 'react-native-elements'
 import { Card, Button } from '../UI'
-import SettingsActions from '../Redux/SettingsRedux'
 import { NavigationActions } from 'react-navigation'
 import { logout } from '../Redux/LoginRedux'
 
@@ -25,11 +24,6 @@ class SettingsScreen extends Component {
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Card>
-            <FormLabel>Device Name</FormLabel>
-            <FormInput
-              value={this.props.deviceName}
-              onChangeText={text => this.props.updateDevice(text)}
-            />
             <Button
               bg="danger"
               title="Log out"
@@ -48,11 +42,9 @@ class SettingsScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  deviceName: state.settings.deviceName
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateDevice: text => dispatch(SettingsActions.updateDevice(text)),
   logout: () => dispatch(logout())
 })
 

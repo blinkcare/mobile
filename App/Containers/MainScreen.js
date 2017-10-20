@@ -8,6 +8,7 @@ import MainActions, { getQueue } from '../Redux/MainRedux'
 
 // Components
 import MorseDisplay from '../Components/MorseDisplay'
+import DeviceDisplay from '../Components/DeviceDisplay'
 
 class MainScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -25,7 +26,6 @@ class MainScreen extends Component {
 
   componentDidMount() {
     let query = new Parse.Query('Queue')
-    query.equalTo('deviceName', this.props.deviceName) // ONLY WORKS ON APP RESTART
     this.subscription = query.subscribe()
     this.subscription.on('create', object => {
       this.props.getQueue(object)
@@ -42,33 +42,29 @@ class MainScreen extends Component {
     this.subscription.unsubscribe()
   }
 
-  render() {
-    const { error, characters, queue, stat, deviceName } = this.props
-    const errorText = error ? (
-      <Text color="error">There was an error connecting to the device.</Text>
-    ) : null
+  devicesMap() {
+    return Object.keys(this.props.totalObj).map((key, index) => {
+      const { characters, queue, stat } = this.props.totalObj[key]
+      const deviceName = key
+      return (
+        <DeviceDisplay key={key} deviceName={deviceName} characters={characters} queue={queue} stat={stat} />
+      )
+    })
+  }
 
+  render() {
     return (
       <ScrollView p={2}>
-        <Box pt={3} px={2}>
-          <Text fontWeight="bold" f={4} color="slate" children={deviceName} />
-        </Box>
-        <Card mt={0}>
-          <MorseDisplay current={characters} waiting={queue} status={stat} />
-          {errorText}
-        </Card>
+        {this.devicesMap()}
       </ScrollView>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const { stat, characters, queue } = state.main
+  const { totalObj } = state.main
   return {
-    deviceName: state.settings.deviceName,
-    stat,
-    characters,
-    queue
+    totalObj
   }
 }
 
