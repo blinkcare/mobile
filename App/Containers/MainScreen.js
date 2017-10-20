@@ -47,17 +47,19 @@ class MainScreen extends Component {
       const { characters, queue, stat } = this.props.totalObj[key]
       const deviceName = key
       return (
-        <DeviceDisplay key={key} deviceName={deviceName} characters={characters} queue={queue} stat={stat} />
+        <DeviceDisplay
+          key={key}
+          deviceName={deviceName}
+          characters={characters}
+          queue={queue}
+          stat={stat}
+        />
       )
     })
   }
 
   render() {
-    return (
-      <ScrollView p={2}>
-        {this.devicesMap()}
-      </ScrollView>
-    )
+    return <ScrollView p={2}>{this.devicesMap()}</ScrollView>
   }
 }
 

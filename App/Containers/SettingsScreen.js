@@ -41,8 +41,7 @@ class SettingsScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())
