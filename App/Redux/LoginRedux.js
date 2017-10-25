@@ -30,7 +30,7 @@ export const INITIAL_STATE = Immutable({
   logging: false,
   passmismatch: false,
   error: '',
-  resetError: '',
+  resetError: ''
 })
 
 /* ------------- Reducers ------------- */

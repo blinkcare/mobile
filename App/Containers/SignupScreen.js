@@ -50,10 +50,13 @@ class SignupScreen extends Component {
         <KeyboardAvoidingView behavior="position">
           <Card>
             <FormLabel>First Name</FormLabel>
-            <FormInput value={name} onChangeText={a => {
-              this.props.setError('')
-              this.props.setName(a)
-            }} />
+            <FormInput
+              value={name}
+              onChangeText={a => {
+                this.props.setError('')
+                this.props.setName(a)
+              }}
+            />
             <FormLabel>Email</FormLabel>
             <FormInput
               keyboardType="email-address"
@@ -62,9 +65,12 @@ class SignupScreen extends Component {
                 this.props.setError('')
                 this.props.setEmail(a)
               }}
-              autoCapitalize='none'
+              autoCapitalize="none"
             />
-            <FormLabel>Password (Must contain at least 8 characters, with 1 lowercase character, 1 uppercase character, and 1 digit)</FormLabel>
+            <FormLabel>
+              Password (Must contain at least 8 characters, with 1 lowercase
+              character, 1 uppercase character, and 1 digit)
+            </FormLabel>
             <FormInput
               secureTextEntry={true}
               value={password}

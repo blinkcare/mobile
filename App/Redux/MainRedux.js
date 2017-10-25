@@ -63,23 +63,22 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const setchar = (state, { device, chars }) => {
-  let s = {totalObj: {}}
-  s.totalObj[device] = {characters: chars}
-  return state.merge(s, {deep: true})
+  let s = { totalObj: {} }
+  s.totalObj[device] = { characters: chars }
+  return state.merge(s, { deep: true })
 }
 
 export const setstat = (state, { device, stat }) => {
-  let s = {totalObj: {}}
-  s.totalObj[device] = {stat}
-  return state.merge(s, {deep: true})
+  let s = { totalObj: {} }
+  s.totalObj[device] = { stat }
+  return state.merge(s, { deep: true })
 }
 
 export const setq = (state, { device, queue }) => {
-  let s = {totalObj: {}}
-  s.totalObj[device] = {queue}
-  return state.merge(s, {deep: true})
+  let s = { totalObj: {} }
+  s.totalObj[device] = { queue }
+  return state.merge(s, { deep: true })
 }
-
 
 /* ------------- Thunk Actions ------------- */
 

@@ -34,14 +34,14 @@ class StartScreen extends Component {
         bg="primary"
         style={{ height: '100%' }}
       >
-        <Text f={6} fontWeight="bold" color="white" align="center" mb={2}>
-          Blink!
+        <Text f={6} fontWeight="bold" color="white" align="center">
+          Blink
         </Text>
         <Button
           onPress={() => this.props.navigation.navigate('LoginScreen')}
           title="Sign in"
           bg="secondary"
-          mb={2}
+          my={2}
         />
         <Button
           onPress={() => this.props.navigation.navigate('SignupScreen')}

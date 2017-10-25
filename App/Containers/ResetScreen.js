@@ -44,7 +44,7 @@ class ResetScreen extends Component {
                 this.props.setError('')
                 this.props.setEmail(a)
               }}
-              autoCapitalize='none'
+              autoCapitalize="none"
             />
             <Button
               onPress={() => {
