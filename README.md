@@ -39,3 +39,6 @@ Secrets.GOOGLE_MAPS_API_KEY  // 'abcdefgh'
 
 The `.env` file is ignored by git keeping those secrets out of your repo.
 
+## Notes
+
+Upgrade react-native: https://github.com/facebook/react-native/issues/12261#issuecomment-284047679
