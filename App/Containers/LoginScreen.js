@@ -3,6 +3,7 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
+import { scale } from '../UI/theme'
 import Parse from 'parse/react-native'
 import { NavigationActions } from 'react-navigation'
 import LoginActions, { login } from '../Redux/LoginRedux'
@@ -66,8 +67,7 @@ class LoginScreen extends Component {
             <Button
               title="Reset password"
               bg="secondary"
-              mt={1}
-              mb={2}
+              buttonStyle={{marginVertical: scale[1]}}
               onPress={() => {
                 this.props.navigation.navigate('ResetScreen')
               }}

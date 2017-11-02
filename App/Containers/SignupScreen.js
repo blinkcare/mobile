@@ -3,6 +3,7 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
+import { scale } from '../UI/theme'
 import Parse from 'parse/react-native'
 import LoginActions, { signup, login } from '../Redux/LoginRedux'
 import { NavigationActions } from 'react-navigation'
@@ -113,7 +114,7 @@ class SignupScreen extends Component {
               }}
               title="Create account"
               disabled={passmismatch}
-              my={2}
+              buttonStyle={{marginVertical: scale[1]}}
             />
             {errorText}
           </Card>

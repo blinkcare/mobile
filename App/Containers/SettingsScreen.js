@@ -3,6 +3,7 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormLabel, FormInput } from 'react-native-elements'
 import { Card, Button } from '../UI'
+import { scale } from '../UI/theme'
 import { NavigationActions } from 'react-navigation'
 import { logout } from '../Redux/LoginRedux'
 
@@ -27,7 +28,7 @@ class SettingsScreen extends Component {
             <Button
               bg="danger"
               title="Log out"
-              my={2}
+              buttonStyle={{marginVertical: scale[1]}}
               onPress={() => {
                 this.props.logout().then(() => {
                   this.resetNavigation('StartScreen')

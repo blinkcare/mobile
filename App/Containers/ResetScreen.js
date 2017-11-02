@@ -3,6 +3,7 @@ import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 import { FormInput, FormLabel } from 'react-native-elements'
 import { Card, Text, Button } from '../UI'
+import { scale } from '../UI/theme'
 import LoginActions, { reset } from '../Redux/LoginRedux'
 
 const successMessage =
@@ -54,7 +55,7 @@ class ResetScreen extends Component {
                   .catch(() => {})
               }}
               title="Reset Password"
-              my={2}
+              buttonStyle={{marginVertical: scale[1]}}
             />
             {error}
           </Card>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Flex, Text, Button } from '../UI'
+import { scale } from '../UI/theme'
 import Parse from 'parse/react-native'
 import { NavigationActions } from 'react-navigation'
 
@@ -41,7 +42,7 @@ class StartScreen extends Component {
           onPress={() => this.props.navigation.navigate('LoginScreen')}
           title="Sign in"
           bg="secondary"
-          my={2}
+          buttonStyle={{marginVertical: scale[1]}}
         />
         <Button
           onPress={() => this.props.navigation.navigate('SignupScreen')}
